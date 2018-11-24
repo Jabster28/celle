@@ -623,10 +623,31 @@ io.metric({
     return client.channels.array().length;
   }
 });
+io.metric({
+  type: 'metric',
+  name: 'Cached users',
+  value: function() {
+    return client.users.array().length;
+  }
+});
 
 io.action('Logging Test', (cb) => {
 console.log("test pm2 log")
      cb({ success: true });
+});
+io.action('Set Offline', (cb) => {
+client.user.setPresence({ game: { name: 'with discord.js' }, status: 'invisible' })
+cb("Celle is now invisible\n");
+
+});
+io.action('Set AFK', (cb) => {
+client.user.setPresence({ game: { name: 'with discord.js' }, status: 'idle' })
+cb("Celle is now invisible\n");
+
+});
+io.action('Set Online', (cb) => {
+client.user.setPresence({ game: { name: 'with discord.js' }, status: 'online' })
+cb("Celle is now online\n");
 });
 
 io.action('alert', (cb) => {
