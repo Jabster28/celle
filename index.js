@@ -1,12 +1,22 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 require('dotenv').config();
-const token = process.env.tkn; // Bot token goes here :)
+//If you're using PM2 (packaged with node), you can use the code underneath here and add
+//tkn: 'tokenGoesHere'
+//in the config.js file and replace the script name with index.js
+// const token = process.env.tkn;
+// if you're not sharing the code (not on github, repl.it, etc) then just uncomment the code inderneath here and paste your code in the quotes
+//const token = ''
+// I'm using PM2 so I'll use
+const token = process.env.tkn;
+// to get my token.
 const keep_alive = require('./keep_alive.js')
 client.on('ready', () => {
-  console.log("I'm in");
+  console.log("Hacking the mainframe with an identity of:");
   console.log(client.user.username);
+  console.log("I'm in")
 });
+
 function chAnn(ch) {
   return ch.name == "announcements";
 }
@@ -23,8 +33,10 @@ function isint(n) {
 
 function messageChecker(mess) {
   var name = mess.author
-  lastmess = mess.channel.fetchMessages({ limit: 1 })
-  lastmess.then(function () {
+  lastmess = mess.channel.fetchMessages({
+    limit: 1
+  })
+  lastmess.then(function() {
     lastmesss = lastmess.first()
     if (lastmesss.content.charAt(0) == ";") {
       if (lastmesss.author == name) {
@@ -42,6 +54,7 @@ function messageChecker(mess) {
 function tonumber(num) {
   return (num / 1 == num)
 }
+
 function isOk(message) {
   if (message.author.bot) {
     return false
@@ -62,6 +75,19 @@ client.on('message', msg => {
     if (msg.content.toLowerCase() == '!celle') {
       msg.channel.send("Hi! I'm Celle, a bot made by Justyn (Jabster28)! Right now, I'm still learning to do lots of things, but I can do simple things like `!add 1 1` to do arithmetic or `!id` to give you your ID. I hope that I make your server 11 times better! :D")
       msg.channel.send("Tip: Use !commands to see what I can do")
+    }
+  }
+})
+
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == '!test') {
+      /*
+      embed = new Discord.RichEmbed();
+      embed.setColor("BLUE")
+      embed.addField("meme", "text")
+      msg.channel.send(embed)
+      */
     }
   }
 })
@@ -95,6 +121,73 @@ client.on('message', msg => {
     }
   }
 })
+// !me
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ")
+    if (mess[0] == "!me") {
+      if (msg.mentions.users.array()[0]) {
+        msgg = msg.mentions.users.array()[0]
+        if (msg.mentions.users.array()[0].bot != true) {
+          msgg = msg.mentions.users.array()[0]
+        }
+        console.log("ment")
+        console.log(msg.mentions.users.array()[0])
+
+        embed = new Discord.RichEmbed();
+        embed.addField("Permissions: ", msg.member.permissions.toArray())
+
+        embed.setAuthor(msgg.username, msgg.avatarURL)
+        embed.setColor("BLUE")
+        embed.addField("Registered: ", msgg.createdAt)
+        if (msg.mentions.members.array()[0]) {
+          menroles = msg.mentions.members.array()[0].roles.array()
+          menreadroles = []
+          for (i = 0; i < menroles.length; i++) {
+            menreadroles.push("<@" + menroles[i].id + ">")
+          }
+          embed.addField("Roles: ", menreadroles, true)
+        }
+        //  embed.addField("Bot? ", msg.author.bot, true)
+        embed.addField("Unique Snowflake ID: ", msgg.id)
+        embed.addField("Username: ", msgg.username)
+        embed.addField("Friend tag: ", msgg.tag)
+        if (msgg.presence.game) {
+          embed.addField("Current Application or Game: ", msgg.presence.game.toString())
+        }
+        embed.addField("User Presence? ", msgg.presence.status.toUpperCase())
+        embed.addField("Avatar: ", msgg.username)
+        embed.setImage(msgg.avatarURL)
+        msg.channel.send(embed)
+      } else {
+        embed = new Discord.RichEmbed();
+        embed.addField("Permissions: ", msg.member.permissions.toArray())
+        embed.setAuthor(msg.author.username, msg.author.avatarURL)
+        embed.setColor("BLUE")
+        embed.addField("Registered: ", msg.author.createdAt)
+        if (1) {
+          menroles = msg.member.roles.array()
+          menreadroles = []
+          for (i = 0; i < menroles.length; i++) {
+            menreadroles.push("<@" + menroles[i].id + ">")
+          }
+          embed.addField("Roles: ", menreadroles, true)
+        }
+        //  embed.addField("Bot? ", msg.author.bot, true)
+        embed.addField("Unique Snowflake ID: ", msg.author.id)
+        embed.addField("Username: ", msg.author.username)
+        embed.addField("Friend tag: ", msg.author.tag, true)
+        if (msg.author.presence.game) {
+          embed.addField("Current Application or Game: ", msg.author.presence.game.toString(), true)
+        }
+        embed.addField("User Presence? ", msg.author.presence.status.toUpperCase())
+        embed.addField("Avatar: ", msg.author.username)
+        embed.setImage(msg.author.avatarURL)
+        msg.channel.send(embed)
+      }
+    }
+  }
+})
 
 // Hi
 client.on('message', msg => {
@@ -120,7 +213,9 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!alert") {
+      msg.delete()
       if (msg.author.username == "Jabster28") {
+
         guildss = client.guilds.array()
         console.log(guildss.length)
         for (i = 0; i < guildss.length; i = i + 1) {
@@ -130,11 +225,12 @@ client.on('message', msg => {
             ch = gld.channels.array().filter(chAnn);
             //console.log("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
-            msg.delete()
-            console.log(ch)
+
+            console.log(ch.name)
             //console.log(ch[0])
             if (ch[0]) {
-              ch[0].send("You may have noticed that some of my commands aren't working normally, that's because I'm moving to a new house! As you know, moving takes a while and only some things are in the new house. (by the way, I'm not actually moving, I am being rewritten in JavaScript) So right now, not many commands are working. I will ping everyone online once a handful of them start working ")
+              sentmess = ch[0].send("<@487918554776338432> now has some functioning commands!\nYou can use `!me` to display some information about your user, like your friend tag and current game\n`!celle` will give you a brief description of me\n`tag` will get your unique Snowflake ID if you don't want to do `!me` to fill up your screen.\nI will alert you again once more commands have been restored")
+              console.log(sentmess.id)
             }
           }
         }
@@ -255,15 +351,16 @@ client.on('message', msg => {
 client:on('recipientAdd', function(message)
 channel.send(user + " was removed from this channel.")
 }
-// !Tag
-client.on('message', msg => {
-  if (isOk(message)) {
-if msg.content.toLowerCase() == "!tag" {
-message.channel.send("Your tag is ```" + message.author.tag + "```")
-}
-}
-}
 */
+//!Tag
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!tag") {
+      msg.channel.send("Your tag is ```" + msg.author.tag + "```")
+    }
+  }
+})
+
 // !id
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -291,7 +388,7 @@ client.on('message', msg => {
       while (noun1 = 12345789876543) {
 
 
-      noun1 = messageChecker(msg)
+        noun1 = messageChecker(msg)
       }
       msg.channel.send("Give me a `plural noun`, please!\nNote: Start the message with a semi-colon for me to notice it\ne.g `;apples`")
       noun2 = messageChecker(msg)
@@ -314,6 +411,7 @@ client.on('message', msg => {
     }
   }
 })
+
 
 // !end
 client.on('message', msg => {
@@ -487,11 +585,27 @@ console.log(lines_from("meme.txt"))
 client:run('Bot NDg3OTE4NTU0Nzc2MzM4NDMy.DnWdEg.0Tm5zm8cNxGi1QUtMCEN1OwlaEk')
 */
 //} of jsify
+const io = require('@pm2/io');
 
-client.login(token);var http = require('http');
+const Current_req_processed = io.metric({
+  name: 'Current req processed',
+  type: 'counter',
+});
+var http = require('http');
+http.createServer((req, res) => {
+  // Increment the counter, counter will eq 1
+  Current_req_processed.inc();
+  req.on('end', () => {
+    // Decrement the counter, counter will eq 0
+    Current_req_processed.dec();
+  });
+});
+
+client.login(token);
+
 /*
 http.createServer(function (req, res) {
-  res.write("I'm alive");
+  res.write("I'm in");
   res.end();
 }).listen(8080);
 */
