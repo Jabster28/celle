@@ -1,3 +1,15 @@
+const io = require('@pm2/io')
+
+io.init({
+  metrics: {
+    network: {
+      ports: true
+    }
+  }
+})
+io.metric({
+  name: 'Realtime user',
+});
 const Discord = require('discord.js');
 const client = new Discord.Client();
 require('dotenv').config();
@@ -585,22 +597,59 @@ console.log(lines_from("meme.txt"))
 client:run('Bot NDg3OTE4NTU0Nzc2MzM4NDMy.DnWdEg.0Tm5zm8cNxGi1QUtMCEN1OwlaEk')
 */
 //} of jsify
-const io = require('@pm2/io');
 
-const Current_req_processed = io.metric({
-  name: 'Current req processed',
-  type: 'counter',
-});
+
 var http = require('http');
-http.createServer((req, res) => {
-  // Increment the counter, counter will eq 1
-  Current_req_processed.inc();
-  req.on('end', () => {
-    // Decrement the counter, counter will eq 0
-    Current_req_processed.dec();
-  });
+
+io.metric({
+  type: 'metric',
+  name: 'Accessible Servers',
+  value: function() {
+    return client.guilds.array().length;
+  }
+});
+io.metric({
+  type: 'metric',
+  name: "Bot's Ping",
+  value: function() {
+    return client.ping;
+  }
 });
 
+io.metric({
+  type: 'metric',
+  name: 'Accessible Channels',
+  value: function() {
+    return client.channels.array().length;
+  }
+});
+
+io.action('Logging Test', (cb) => {
+console.log("test pm2 log")
+     cb({ success: true });
+});
+
+io.action('alert', (cb) => {
+  guildss = client.guilds.array()
+  console.log(guildss.length)
+  for (i = 0; i < guildss.length; i = i + 1) {
+    gld = guildss[i]
+    console.log(i)
+    if (gld.available) {
+      ch = gld.channels.array().filter(chAnn);
+      //console.log("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+
+
+      console.log(ch.name)
+      //console.log(ch[0])
+      if (ch[0]) {
+        sentmess = ch[0].send("")
+        console.log(sentmess.id)
+      }
+    }
+  }
+     cb({ success: true });
+});
 client.login(token);
 
 /*
