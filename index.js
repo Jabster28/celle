@@ -72,9 +72,9 @@ function isOk(message) {
     return false
   } else if (message.author.username == "Jabster28") {
     return true
-  } else if ((message.channel.name == "bot-commands") || (message.channel.name == "bot-craziness") || (message.channel.name == "celle")) {
+  } else if ((message.channel.name == "bot-commands") || (message.channel.name == "bot-craziness") || (message.channel.name == "testing-1") || (message.channel.name == "testing-2") || (message.channel.name == "bot-hell") || (message.channel.name == "celle")) {
     return true
-  } else if (message.guild.name != "Unaccepted fanclub") {
+  } else if ((message.guild.name != "Unaccepted fanclub") || (message.guild.name != "Discord Bot List")) {
     return true
   } else {
     return false
@@ -613,13 +613,13 @@ io.metric({
   type: 'metric',
   name: 'Status',
   value: function() {
-    return client.user.presence.status;
+    return 2//client.user.presence.status;
   }
 });
 
 io.metric({
   type: 'metric',
-  name: "Bot's Ping",
+  name: 'Ping',
   value: function() {
     return client.ping;
   }
