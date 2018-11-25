@@ -661,6 +661,7 @@ io.action('Set AFK', (cb) => {
 });
 
 io.action('Set Online', (cb) => {
+  
   ran = generateRandomNumber(1, 6)
   if (ran == 1) {
     client.user.setPresence({
@@ -736,7 +737,35 @@ io.action('error test', (cb) => {
 
   io.notifyError(new Error('This is an error'));
 });
+      status: 'online'
+    })
+    cb("Celle is now online\n");
 
+  } else if (ran == 5) {
+    client.user.setPresence({
+      game: {
+        name: 'Chess with Zeus',
+        party: {
+  size: [2, 2]
+}
+      },
+      status: 'online'
+    })
+    cb("Celle is now online\n");
+
+  } else {
+    io.notify("Error: No matching number. Number was " + ran)
+    cb("ERROR, CHECK ISSUES LOG\n");
+
+  }
+});
+
+io.action('error test', (cb) => {
+  cb("ERROR, CHECK ISSUES LOG");
+
+  io.notify('This is a notify error');
+
+  io.notifyError(new Error('This is an error'));
 io.action('alert', (cb) => {
   guildss = client.guilds.array()
   //  console.log(guildss.length)
