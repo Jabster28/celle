@@ -132,7 +132,7 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!invite") {
-      msg.channel.send("Here's the link to my website! \n https://discordapp.com/api/oauth2/authorize?client_id=487918554776338432&permissions=8&scope=bot\nThis will be updated with a shorter and better link once I gets verified.")
+      msg.channel.send("Here's the link to my website! \n https://bot.discord.io/celle\nThis will be updated with a better link once I get verified.")
     }
   }
 })
