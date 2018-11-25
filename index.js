@@ -7,9 +7,11 @@ io.init({
     }
   }
 })
-io.metric({
-  name: 'Realtime user',
-});
+
+function generateRandomNumber(min, max) {
+return Math.floor(Math.random() * 6);
+}
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
 require('dotenv').config();
@@ -601,7 +603,7 @@ io.metric({
   type: 'metric',
   name: 'Status',
   value: function() {
-      return "N/A";
+    return "N/A";
     //  return client.user.presence.status;
   }
 });
@@ -657,15 +659,61 @@ io.action('Set AFK', (cb) => {
   cb("Celle is now Idle\n");
 
 });
+
 io.action('Set Online', (cb) => {
-  client.user.setPresence({
-    game: {
-      name: 'with discord.js'
-    },
-    status: 'online'
-  })
-  cb("Celle is now online\n");
+  ran = generateRandomNumber(1, 6)
+  if (ran == 1) {
+    client.user.setPresence({
+      game: {
+        name: 'with discord.js'
+      },
+      status: 'online'
+    })
+    cb("Celle is now online\n");
+
+  } else if (ran == 2) {
+    client.user.setPresence({
+      game: {
+        name: 'the kazoo'
+      },
+      status: 'online'
+    })
+    cb("Celle is now online\n");
+
+  } else if (ran == 3) {
+    client.user.setPresence({
+      game: {
+        name: 'Splatoon'
+      },
+      status: 'online'
+    })
+    cb("Celle is now online\n");
+
+  } else if (ran == 4) {
+    client.user.setPresence({
+      game: {
+        name: "a game you can't join"
+      },
+      status: 'online'
+    })
+    cb("Celle is now online\n");
+
+  } else if (ran == 5) {
+    client.user.setPresence({
+      game: {
+        name: 'Chess with Zeus'
+      },
+      status: 'online'
+    })
+    cb("Celle is now online\n");
+
+  } else {
+    io.notify("Error: No matching number. Number was " + ran)
+    cb("ERROR, CHECK ISSUES LOG\n");
+
+  }
 });
+
 io.action('error test', (cb) => {
   cb("ERROR, CHECK ISSUES LOG");
 
