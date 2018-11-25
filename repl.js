@@ -488,10 +488,10 @@ client:run('Bot NDg3OTE4NTU0Nzc2MzM4NDMy.DnWdEg.0Tm5zm8cNxGi1QUtMCEN1OwlaEk')
 */
 //} of jsify
 
-client.login(token);var http = require('http');
-/*
+client.login(token);
+var http = require('http');
+
 http.createServer(function (req, res) {
   res.write("I'm alive");
   res.end();
 }).listen(8080);
-*/
