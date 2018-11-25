@@ -9,7 +9,7 @@ io.init({
 })
 
 function generateRandomNumber(min, max) {
-return Math.floor(Math.random() * 6);
+return Math.floor(Math.random() * 5) + 1;
 }
 
 const Discord = require('discord.js');
@@ -665,7 +665,10 @@ io.action('Set Online', (cb) => {
   if (ran == 1) {
     client.user.setPresence({
       game: {
-        name: 'with discord.js'
+        name: 'with discord.js',
+        party: {
+  size: [2, 2]
+}
       },
       status: 'online'
     })
@@ -674,7 +677,10 @@ io.action('Set Online', (cb) => {
   } else if (ran == 2) {
     client.user.setPresence({
       game: {
-        name: 'the kazoo'
+        name: 'the kazoo',
+        party: {
+  size: [2, 2]
+}
       },
       status: 'online'
     })
@@ -683,7 +689,10 @@ io.action('Set Online', (cb) => {
   } else if (ran == 3) {
     client.user.setPresence({
       game: {
-        name: 'Splatoon'
+        name: 'Splatoon',
+        party: {
+  size: [2, 2]
+}
       },
       status: 'online'
     })
@@ -692,7 +701,10 @@ io.action('Set Online', (cb) => {
   } else if (ran == 4) {
     client.user.setPresence({
       game: {
-        name: "a game you can't join"
+        name: "a game you can't join",
+        party: {
+          size: [2, 2]
+        }
       },
       status: 'online'
     })
@@ -701,7 +713,10 @@ io.action('Set Online', (cb) => {
   } else if (ran == 5) {
     client.user.setPresence({
       game: {
-        name: 'Chess with Zeus'
+        name: 'Chess with Zeus',
+        party: {
+  size: [2, 2]
+}
       },
       status: 'online'
     })
