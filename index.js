@@ -586,7 +586,7 @@ client:run('Bot NDg3OTE4NTU0Nzc2MzM4NDMy.DnWdEg.0Tm5zm8cNxGi1QUtMCEN1OwlaEk')
 */
 //} of jsify
 
-
+client.login(token);
 var http = require('http');
 
 io.metric({
@@ -601,11 +601,8 @@ io.metric({
   type: 'metric',
   name: 'Status',
   value: function() {
-<<<<<<< Updated upstream
-    return 2//client.user.presence.status;
-=======
-    return "N/A" //  return client.user.presence.status;
->>>>>>> Stashed changes
+      return "N/A";
+    //  return client.user.presence.status;
   }
 });
 
@@ -720,5 +717,3 @@ http.createServer(function (req, res) {
   res.end();
 }).listen(8080);
 */
-
-client.login(token);
