@@ -40,7 +40,7 @@ client.on('message', msg => {
 process.setMaxListeners(20);
 //start of jsify
 function isint(n) {
-  return n == n / 1
+  return n / 1
 }
 
 function messageChecker(mess) {
