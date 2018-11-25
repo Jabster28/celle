@@ -9,7 +9,7 @@ io.init({
 })
 
 function generateRandomNumber(min, max) {
-return Math.floor(Math.random() * 5) + 1;
+  return Math.floor(Math.random() * 5) + 1;
 }
 
 const Discord = require('discord.js');
@@ -661,15 +661,15 @@ io.action('Set AFK', (cb) => {
 });
 
 io.action('Set Online', (cb) => {
-  
+
   ran = generateRandomNumber(1, 6)
   if (ran == 1) {
     client.user.setPresence({
       game: {
         name: 'with discord.js',
         party: {
-  size: [2, 2]
-}
+          size: [2, 2]
+        }
       },
       status: 'online'
     })
@@ -680,8 +680,8 @@ io.action('Set Online', (cb) => {
       game: {
         name: 'the kazoo',
         party: {
-  size: [2, 2]
-}
+          size: [2, 2]
+        }
       },
       status: 'online'
     })
@@ -692,8 +692,8 @@ io.action('Set Online', (cb) => {
       game: {
         name: 'Splatoon',
         party: {
-  size: [2, 2]
-}
+          size: [2, 2]
+        }
       },
       status: 'online'
     })
@@ -716,8 +716,8 @@ io.action('Set Online', (cb) => {
       game: {
         name: 'Chess with Zeus',
         party: {
-  size: [2, 2]
-}
+          size: [2, 2]
+        }
       },
       status: 'online'
     })
@@ -736,76 +736,65 @@ io.action('error test', (cb) => {
   io.notify('This is a notify error');
 
   io.notifyError(new Error('This is an error'));
-});
-      status: 'online'
-    })
-    cb("Celle is now online\n");
-
-  } else if (ran == 5) {
-    client.user.setPresence({
-      game: {
-        name: 'Chess with Zeus',
-        party: {
-  size: [2, 2]
-}
-      },
-      status: 'online'
-    })
-    cb("Celle is now online\n");
-
-  } else {
-    io.notify("Error: No matching number. Number was " + ran)
-    cb("ERROR, CHECK ISSUES LOG\n");
-
-  }
-});
-
-io.action('error test', (cb) => {
-  cb("ERROR, CHECK ISSUES LOG");
-
-  io.notify('This is a notify error');
-
-  io.notifyError(new Error('This is an error'));
-io.action('alert', (cb) => {
-  guildss = client.guilds.array()
-  //  console.log(guildss.length)
-  channlz = []
-  for (i = 0; i < guildss.length; i = i + 1) {
-    gld = guildss[i]
-    //  if (gld.name == "Testing A Bot" || gld.name == "Lol i dunno") {
-    //    console.log(i)
-    if (gld.available) {
-      ch = gld.channels.array().filter(chAnn);
-      //    console.log(ch.name)
-      //console.log(ch[0])
-      if (ch[0]) {
-        sentmess = ch[0].send("test")
-        console.log(sentmess.id)
-        channlz.push(ch[0].guild.name)
-      }
-    } else {
-      io.notifyError(new Error('Unavailable guild'));
-    }
-    //  }
-  }
-  if (channlz.length != 0) {
-    cb("Succesfully notified " + channlz.length + " server(s).\n");
-    io.metric({
-      type: 'metric',
-      name: 'Alerted servers',
-      value: function() {
-        return channlz.length;
-      }
-    });
-
-  } else {
-    io.notify('Error: Empty array of servers');
-    cb("ERROR, CHECK ISSUES LOG\n");
-  }
 });
 /*
-http.createServer(function (req, res) {
-  res.write("I'm in");
-  res.end();
-}).listen(8080);
+client.user.setPresence({
+  game: {
+    name: 'Chess with Zeus',
+    party: {
+      size: [2, 2]
+    }
+  },
+  status: 'online'
+})
 */
+io.action('error test', (cb) => {
+      cb("ERROR, CHECK ISSUES LOG");
+
+      io.notify('This is a notify error');
+
+      io.notifyError(new Error('This is an error'));
+      io.action('alert', (cb) => {
+        guildss = client.guilds.array()
+        //  console.log(guildss.length)
+        channlz = []
+        for (i = 0; i < guildss.length; i = i + 1) {
+          gld = guildss[i]
+          //  if (gld.name == "Testing A Bot" || gld.name == "Lol i dunno") {
+          //    console.log(i)
+          if (gld.available) {
+            ch = gld.channels.array().filter(chAnn);
+            //    console.log(ch.name)
+            //console.log(ch[0])
+            if (ch[0]) {
+              sentmess = ch[0].send("test")
+              console.log(sentmess.id)
+              channlz.push(ch[0].guild.name)
+            }
+          } else {
+            io.notifyError(new Error('Unavailable guild'));
+          }
+          //  }
+        }
+        if (channlz.length != 0) {
+          cb("Succesfully notified " + channlz.length + " server(s).\n");
+          io.metric({
+            type: 'metric',
+            name: 'Alerted servers',
+            value: function() {
+              return channlz.length;
+            }
+          });
+
+        } else {
+          io.notify('Error: Empty array of servers');
+          cb("ERROR, CHECK ISSUES LOG\n");
+        }
+      });
+    })
+    /*
+    http.createServer(function (req, res) {
+      res.write("I'm in");
+      res.end();
+    }).listen(8080);
+    */
