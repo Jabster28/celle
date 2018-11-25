@@ -17,11 +17,12 @@ require('dotenv').config();
 //tkn: 'tokenGoesHere'
 //in the config.js file and replace the script name with index.js
 // const token = process.env.tkn;
-// if you're not sharing the code (not on github, repl.it, etc) then just uncomment the code inderneath here and paste your code in the quotes
-//const token = ''
 // I'm using PM2 so I'll use
-const token = process.env.tkn;
+token = process.env.tkn;
 // to get my token.
+// if you're not sharing the code (not on github, repl.it, etc) then just uncomment the code underneath here and paste your code in the quotes
+//const token = ''
+
 const keep_alive = require('./keep_alive.js')
 client.on('ready', () => {
   console.log("Hacking the mainframe with an identity of:");
@@ -54,7 +55,7 @@ function messageChecker(mess) {
       if (lastmesss.author == name) {
         newMess = lastmesss.content
         newMess = newMess.substring(1, newMess.length)
-        console.log(lastmesss.content)
+        //    console.log(lastmesss.content)
         return newMess
 
       }
@@ -64,7 +65,7 @@ function messageChecker(mess) {
 }
 
 function tonumber(num) {
-  return (num / 1 == num)
+  return (num / 1)
 }
 
 function isOk(message) {
@@ -129,7 +130,7 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!invite") {
-      msg.channel.send("Here's the link to my website! \n https://discordbots.org/bot/487918554776338432/")
+      msg.channel.send("Here's the link to my website! \n https://discordapp.com/api/oauth2/authorize?client_id=487918554776338432&permissions=8&scope=bot\nThis will be updated with a shorter and better link once I gets verified.")
     }
   }
 })
@@ -213,7 +214,7 @@ client.on('message', msg => {
 // !commands
 client.on('message', msg => {
   if (msg.content == '!commands') {
-    msg.channel.send("**-- WARNING --**\n**Most of these commands will not work, as I am being reprogrammed in JavaScript and this may take a while. I apologise for any inconvenience this may cause. **\n\nI am still learning about things to do, but for now you can type: \n `!permissions` Check the available permissions \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!wordmaker` to play a sentence-making game \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands \n")
+    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n  `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands \n**-- WARNING --**\n**The commands below this line are still in WIP and thus should not be called.**\n`!permissions` Check the available permissions \n`!wordmaker` to play a sentence-making game \n")
   }
 })
 /*
@@ -232,17 +233,17 @@ client.on('message', msg => {
         console.log(guildss.length)
         for (i = 0; i < guildss.length; i = i + 1) {
           gld = guildss[i]
-          console.log(i)
+          //  console.log(i)
           if (gld.available) {
             ch = gld.channels.array().filter(chAnn);
             //console.log("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
 
-            console.log(ch.name)
+            //      console.log(ch.name)
             //console.log(ch[0])
             if (ch[0]) {
               sentmess = ch[0].send("<@487918554776338432> now has some functioning commands!\nYou can use `!me` to display some information about your user, like your friend tag and current game\n`!celle` will give you a brief description of me\n`tag` will get your unique Snowflake ID if you don't want to do `!me` to fill up your screen.\nI will alert you again once more commands have been restored")
-              console.log(sentmess.id)
+              //      console.log(sentmess.id)
             }
           }
         }
@@ -259,7 +260,7 @@ client.on('message', msg => {
       if (msg.member.highestRole.hasPermission("MANAGE_MESSAGES", false, true)) {
         msg.delete()
         guildss = client.guilds.array()
-        console.log(guildss.length)
+        //    console.log(guildss.length)
         for (i = 0; i < guildss.length; i = i + 1) {
           gld = guildss[i]
           chArr = gld.channels.array()
@@ -267,7 +268,7 @@ client.on('message', msg => {
             chi = chArr[i]
             if (chi) {
               if ((chi.name == "general") || (chi.name == "general-off-topic") || (chi.name == "general-💬")) {
-                console.log(gld.name)
+                //          console.log(gld.name)
 
 
                 chi.send("Just a reminder that you can add me to your server if you wish to do so! :)\nHere's the link to my website! \n https://discordbots.org/bot/487918554776338432/")
@@ -395,6 +396,8 @@ message.channel.send("What about you, " + message.author.username + "?")
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!wordmaker") {
+      io.notify("Error: WIP command called")
+      client.yemum.gee()
       msg.channel.send("Give me a `noun`, please!\nNote: Start the message with a semi-colon for me to notice it\ne.g `;apple`")
       var noun1 = 12345789876543
       while (noun1 = 12345789876543) {
@@ -502,82 +505,67 @@ message.channel.send("WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOMY")
 }
 }
 }
-
+*/
 // !add (n1) (n2)
 client.on('message', msg => {
- if (isOk(message)) {
-text = msg.content.toLowerCase()
-a = {}
-for i in string.gmatch(text, "%S+") do
-table.insert(a, i)
-}
-if a[1] == "!add" {
-if (tonumber(a[2]) and tonumber(a[3])) {
-message.channel.send("`" + a[2] + "` plus `" + a[3] + "` is `" + (a[2] + a[3]) + "`. Hope that helped! 😊")
-else
-message.channel.send("Oops! Check that command. Are the first two arguments after `!add` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
-}
-}
-}
-}
+  if (isOk(msg)) {
+    text = msg.content.toLowerCase()
+    a = text.split(" ")
+    if (a[0] == "!add") {
+      if (tonumber(a[1]) && tonumber(a[2])) {
+        msg.channel.send("`" + a[1] + "` plus `" + a[2] + "` is `" + (tonumber(a[1]) + tonumber(a[2])) + "`. Hope that helped! 😊")
+      } else {
+        msg.channel.send("Oops! Check that command. Are the first two arguments after `!add` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
+      }
+    }
+  }
+})
 
 // !multiply (n1) (n2)
 client.on('message', msg => {
- if (isOk(message)) {
-text = msg.content.toLowerCase()
-a = {}
-for i in string.gmatch(text, "%S+") do
-table.insert(a, i)
-}
-if a[1] == "!multiply" {
-if (tonumber(a[2]) and tonumber(a[3])) {
-message.channel.send("`" + a[2] + "` times `" + a[3] + "` is `" + (a[2] * a[3]) + "`. Hope that helped! 😊")
-else
-message.channel.send("Oops! Check that command. Are the first two arguments after `!add` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
-}
-}
-}
-}
+  if (isOk(msg)) {
+    text = msg.content.toLowerCase()
+    a = text.split(" ")
+    if (a[0] == "!multiply") {
+      if (tonumber(a[1]) && tonumber(a[2])) {
+        msg.channel.send("`" + a[1] + "` times `" + a[2] + "` is `" + ((a[1]) * (a[2])) + "`. Hope that helped! 😊")
+      } else {
+        msg.channel.send("Oops! Check that command. Are the first two arguments after `!multiply` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
+      }
+    }
+  }
+})
 
 // !divide (n1) (n2)
 client.on('message', msg => {
- if (isOk(message)) {
-text = msg.content.toLowerCase()
-a = {}
-for i in string.gmatch(text, "%S+") do
-table.insert(a, i)
-}
-if a[1] == "!divide" {
-if (not(a[2] == 0) and (a[3] == 0)) {
-if (tonumber(a[2]) and tonumber(a[3])) {
-message.channel.send("`" + a[2] + "` divided by `" + a[3] + "` is `" + (a[2] / a[3]) + "`. Hope that helped! 😊")
-else
-message.channel.send("Oops! Check that command. Are the first two arguments after `!add` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
-}
-else
-message.channel.send("`0` divided by `0` is `0`")
-}
-}
-}
-}
+  if (isOk(msg)) {
+    text = msg.content.toLowerCase()
+    a = text.split(" ")
+    if (a[0] == "!divide") {
+      if (tonumber(a[1]) && tonumber(a[2])) {
+        msg.channel.send("`" + a[1] + "` divided by `" + a[2] + "` is `" + ((a[1]) / (a[2])) + "`. Hope that helped! 😊")
+      } else {
+        msg.channel.send("Oops! Check that command. Are the first two arguments after `!divide` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
+      }
+    }
+  }
+})
 
 // !minus (n1) (n2)
 client.on('message', msg => {
- if (isOk(message)) {
-text = msg.content.toLowerCase()
-a = {}
-for i in string.gmatch(text, "%S+") do
-table.insert(a, i)
-}
-if a[1] == "!minus" {
-if (tonumber(a[2]) and tonumber(a[3])) {
-message.channel.send("`" + a[2] + "` subtracted by `" + a[3] + "` is `" + (a[2] - a[3]) + "`. Hope that helped! 😊")
-else
-message.channel.send("Oops! Check that command. Are the first two arguments after `!add` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
-}
-}
-}
-}
+  if (isOk(msg)) {
+    text = msg.content.toLowerCase()
+    a = text.split(" ")
+    if (a[0] == "!minus") {
+      if (tonumber(a[1]) && tonumber(a[2])) {
+        msg.channel.send("`" + a[1] + "` minus `" + a[2] + "` is `" + ((a[1]) - (a[2])) + "`. Hope that helped! 😊")
+      } else {
+        msg.channel.send("Oops! Check that command. Are the first two arguments after `!minus` numbers (Should Be)? Are there spaces between the two numbers (Should Be)? Are there spaces in the numbers themselves (Shouldn't Be)?")
+      }
+    }
+  }
+})
+/*
 // !read
 client.on('message', msg => {
 textt = msg.content.toLowerCase()
@@ -613,7 +601,11 @@ io.metric({
   type: 'metric',
   name: 'Status',
   value: function() {
+<<<<<<< Updated upstream
     return 2//client.user.presence.status;
+=======
+    return "N/A" //  return client.user.presence.status;
+>>>>>>> Stashed changes
   }
 });
 
@@ -665,7 +657,7 @@ io.action('Set AFK', (cb) => {
     },
     status: 'idle'
   })
-  cb("Celle is now invisible\n");
+  cb("Celle is now Idle\n");
 
 });
 io.action('Set Online', (cb) => {
@@ -677,35 +669,56 @@ io.action('Set Online', (cb) => {
   })
   cb("Celle is now online\n");
 });
+io.action('error test', (cb) => {
+  cb("ERROR, CHECK ISSUES LOG");
+
+  io.notify('This is a notify error');
+
+  io.notifyError(new Error('This is an error'));
+});
 
 io.action('alert', (cb) => {
   guildss = client.guilds.array()
-  console.log(guildss.length)
+  //  console.log(guildss.length)
+  channlz = []
   for (i = 0; i < guildss.length; i = i + 1) {
     gld = guildss[i]
-    console.log(i)
+    //  if (gld.name == "Testing A Bot" || gld.name == "Lol i dunno") {
+    //    console.log(i)
     if (gld.available) {
       ch = gld.channels.array().filter(chAnn);
-      //console.log("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-
-
-      console.log(ch.name)
+      //    console.log(ch.name)
       //console.log(ch[0])
       if (ch[0]) {
-        sentmess = ch[0].send("")
+        sentmess = ch[0].send("test")
         console.log(sentmess.id)
+        channlz.push(ch[0].guild.name)
       }
+    } else {
+      io.notifyError(new Error('Unavailable guild'));
     }
+    //  }
   }
-  cb({
-    success: true
-  });
-});
-client.login(token);
+  if (channlz.length != 0) {
+    cb("Succesfully notified " + channlz.length + " server(s).\n");
+    io.metric({
+      type: 'metric',
+      name: 'Alerted servers',
+      value: function() {
+        return channlz.length;
+      }
+    });
 
+  } else {
+    io.notify('Error: Empty array of servers');
+    cb("ERROR, CHECK ISSUES LOG\n");
+  }
+});
 /*
 http.createServer(function (req, res) {
   res.write("I'm in");
   res.end();
 }).listen(8080);
 */
+
+client.login(token);
