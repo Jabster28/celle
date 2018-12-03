@@ -171,7 +171,7 @@ client.on('message', msg => {
         servername: msg.guild.name,
         serverid: msg.guild.id
       })
-      msg.author.send("The channel `" + msg.channel.name + "` from server `" + msg.guild.name + "` has been added to the notifications list! This channel will get updates (usually every fortnight) about new/updated features I have! And don't worry, no-one will get pinged.")
+      msg.author.send("The channel `" + msg.channel.name + "` from server `" + msg.guild.name + "` has been added to the notifications list! This channel will get updates (usually every 2 weeks) about new/updated features I have! And don't worry, no-one will get pinged.")
       msg.delete()
     }
   }
