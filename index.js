@@ -15,38 +15,54 @@ io.init({
   }
 })
 
+// Firebase stuffs
+var admin = require('firebase-admin');
+var serviceAccount = require('/Users/Work/Documents/Git things/Celle/celle-firebase-admin.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: process.env.fbdatabase
+});
+var db = admin.database();
+var storage = admin.storage();
+var fbtemp = db.ref("temp/");
+
+var fbnotifs = db.ref("notifications/");
+fbservers = fbtemp.child("servers");
+io.action('FB test', (cb) => {
+  var fbservers = fbtemp.child("servers");
+
+  usersRef.set({});
+  cb("ree")
+});
+
+//Var defs
+const fs = require('fs');
+var cards = JSON.parse(fs.readFileSync("./cards.json"))
+const http = require('http');
+const Discord = require('discord.js');
+const client = new Discord.Client();
+keys = Object.keys(fbservers)
+values = Object.values(fbservers)
+console.log(values);
+// TODO: If you're using PM2 (install with "npm install --save pm2"), you can use the code underneath here and add tkn: 'tokenGoesHere' in the config.js file and replace the script name with index.js
+// const token = process.env.tkn;
+// I'm using PM2 so I'll use
+const token = process.env.tkn;
+// to get my token.
+// if you're not sharing the code (not on github, repl.it, etc) then just uncomment the code underneath here and paste your code in the quotes
+//const token = ''
+const keep_alive = require('./keep_alive.js')
+
+// Function defs
+
 function generateRandomNumber(min, max) {
   return Math.floor(Math.random() * 5) + 1;
 }
 
-const Discord = require('discord.js');
-const client = new Discord.Client();
-require('dotenv').config();
-//If you're using PM2 (packaged with node), you can use the code underneath here and add
-//tkn: 'tokenGoesHere'
-//in the config.js file and replace the script name with index.js
-// const token = process.env.tkn;
-// I'm using PM2 so I'll use
-token = process.env.tkn;
-// to get my token.
-// if you're not sharing the code (not on github, repl.it, etc) then just uncomment the code underneath here and paste your code in the quotes
-//const token = ''
-
-const keep_alive = require('./keep_alive.js')
-client.on('ready', () => {
-  console.log("Hacking the mainframe with an identity of:");
-  console.log(client.user.username);
-  console.log("I'm in")
-});
-
 function chAnn(ch) {
   return ch.name == "announcements";
 }
-client.on('message', msg => {
-  if (msg.author.id != client.user.id) {
-    //     msg.channel.send(msg.content.split('').reverse().join(''));
-  }
-});
+
 process.setMaxListeners(20);
 //start of jsify
 function isint(n) {
@@ -91,6 +107,51 @@ function isOk(message) {
   }
 }
 
+function arrayFind(array, item) {
+  for (i = 0; i < array.length; i++) {
+    if (array[i] == item) {
+      isin = array[i]
+    }
+  }
+  if (isin) {
+    return isin
+  }
+}
+
+function arrayObjectFind(item, array) {
+  for (i = 0; i < array.length; i++) {
+    if (array[i].name == item) {
+      isin = array[i]
+      return isin
+    }
+  }
+}
+
+function findChannel(guld, channelid) {
+  for (var i = 0; i < guld.channels.array().length; i++) {
+    guld.channels.array()[i] == channelll
+    if (chanelll.id == channelid) {
+      return chanelll
+    }
+  }
+}
+
+function findGuild(id) {
+  guildss = client.guilds.array()
+  for (i = 0; i < guildss.length; i++) {
+    if (guildss[i].id == id) {
+      return guildss[i]
+    }
+  }
+}
+// Actual stuffs
+
+client.on('ready', () => {
+  console.log("Hacking the mainframe with an identity of:");
+  console.log(client.user.username);
+  console.log("I'm in")
+});
+
 // !Celle
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -100,30 +161,21 @@ client.on('message', msg => {
     }
   }
 })
-
+//!notify
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == '!test') {
-      /*
-      embed = new Discord.RichEmbed();
-      embed.setColor("BLUE")
-      embed.addField("meme", "text")
-      msg.channel.send(embed)
-      */
+    if (msg.content.toLowerCase() == '!notify') {
+      fbnotifs.push({
+        channelname: "#" + msg.channel.name,
+        channelid: msg.channel.id,
+        servername: msg.guild.name,
+        serverid: msg.guild.id
+      })
+      msg.author.send("The channel `" + msg.channel.name + "` from server `" + msg.guild.name + "` has been added to the notifications list! This channel will get updates (usually every fortnight) about new/updated features I have! And don't worry, no-one will get pinged.")
+      msg.delete()
     }
   }
 })
-
-// @Celle#0510
-client.on('message', msg => {
-  if (isOk(msg)) {
-    if (msg.content.toLowerCase() == '!celle#0510') {
-      msg.channel.send("Hi! I'm Celle, a bot made by Justyn (Jabster28)! Right now, I'm still learning to do lots of things, but I can do simple things like `!add 1 1` to do arithmetic or `!id` to give you your ID. I hope that I make your server 11 times better! :D")
-      msg.channel.send("Tip: Use !commands to see what I can do")
-    }
-  }
-})
-
 // inst that right, celle?
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -134,12 +186,11 @@ client.on('message', msg => {
     }
   }
 })
-
 // !invite
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!invite") {
-      msg.channel.send("Here's the link to my website! \n https://bot.discord.io/celle\nThis will be updated with a better link once I get verified.")
+      msg.channel.send("Here's the link to my website! \n https://discordbots.org/bot/487918554776338432\n")
     }
   }
 })
@@ -210,58 +261,12 @@ client.on('message', msg => {
     }
   }
 })
-
-// Hi
-client.on('message', msg => {
-  if (isOk(msg)) {
-    if (msg.content == '!hi') {
-      msg.channel.send('Hello ' + msg.author.username + "!")
-    }
-  }
-})
-
 // !commands
 client.on('message', msg => {
   if (msg.content == '!commands') {
     msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n  `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands \n**-- WARNING --**\n**The commands below this line are still in WIP and thus should not be called.**\n`!permissions` Check the available permissions \n`!wordmaker` to play a sentence-making game \n")
   }
 })
-/*
-// do
-//   console.log(key, value)
-//}
-// !
-*/
-client.on('message', msg => {
-  if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!alert") {
-      msg.delete()
-      if (msg.author.username == "Jabster28") {
-
-        guildss = client.guilds.array()
-        console.log(guildss.length)
-        for (i = 0; i < guildss.length; i = i + 1) {
-          gld = guildss[i]
-          //  console.log(i)
-          if (gld.available) {
-            ch = gld.channels.array().filter(chAnn);
-            //console.log("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-
-
-            //      console.log(ch.name)
-            //console.log(ch[0])
-            if (ch[0]) {
-              sentmess = ch[0].send("<@487918554776338432> now has some functioning commands!\nYou can use `!me` to display some information about your user, like your friend tag and current game\n`!celle` will give you a brief description of me\n`tag` will get your unique Snowflake ID if you don't want to do `!me` to fill up your screen.\nI will alert you again once more commands have been restored")
-              //      console.log(sentmess.id)
-            }
-          }
-        }
-      }
-    }
-  }
-})
-
-
 // !advert
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -290,7 +295,6 @@ client.on('message', msg => {
     }
   }
 })
-
 /*
 client.on('message', msg => {
   if (isOk(message)) {
@@ -352,7 +356,6 @@ client.on('message', msg => {
     }
   }
 })
-
 // !deleteviaid
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -367,14 +370,7 @@ client.on('message', msg => {
     }
   }
 })
-
-/*
-// User Removed
-client:on('recipientAdd', function(message)
-channel.send(user + " was removed from this channel.")
-}
-*/
-//!Tag
+// !tag
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!tag") {
@@ -382,7 +378,6 @@ client.on('message', msg => {
     }
   }
 })
-
 // !id
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -391,52 +386,101 @@ client.on('message', msg => {
     }
   }
 })
-/*
-// !me
-client.on('message', msg => {
-  if (isOk(message)) {
-if msg.content.toLowerCase() == "!me" {
-message.channel.send("What about you, " + message.author.username + "?")
-}
-}
-}
-*/
-// !wordmaker
+// !card
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!wordmaker") {
-      io.notify("Error: WIP command called")
-      client.yemum.gee()
-      msg.channel.send("Give me a `noun`, please!\nNote: Start the message with a semi-colon for me to notice it\ne.g `;apple`")
-      var noun1 = 12345789876543
-      while (noun1 = 12345789876543) {
+    text = msg.content.toLowerCase()
+    a = text.split(" ")
+    if (a[0] == "!card") {
+      if (!(a[1])) {
+        embed = new Discord.RichEmbed();
+        if (arrayObjectFind(msg.author.username, cards)) {
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
+          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
+            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
+          }
+        } else {
+          cards.push({
+            "name": msg.author.username,
+            "nnid": 0,
+            "switchfc": 0,
+            "xboxgt": 0,
+            "psn": 0,
+            "insta": 0,
+            "snap": 0,
+            "color": BLUE,
+            "twitter": 0,
+            "g+": 0
 
-
-        noun1 = messageChecker(msg)
-      }
-      msg.channel.send("Give me a `plural noun`, please!\nNote: Start the message with a semi-colon for me to notice it\ne.g `;apples`")
-      noun2 = messageChecker(msg)
-      msg.channel.send("Give me an `adjective`, please!\nNote: Start the message with a semi-colon for me to notice it\ne.g `;red`")
-      adj1 = messageChecker(msg)
-      num1 = "cheese"
-      msg.channel.send("Give me a `number`, please!\nNote: Start the messsage with a semi-colon for me to notice it\ne.g `;12`")
-      num1 = messageChecker(msg)
-      if (tonumber(num1) != true) {
-        msg.channel.send("Are you sure that's a number? >_>")
-        while ((tonumber(num1) != true)) {
-          msg.channel.send("Give me a `number`, please!\nNote: Start the message with a semi-colon for me to notice it\ne.g `;12`")
-          num1 = messageChecker(msg)
+          })
+          fs.writeFileSync("./cards.json", JSON.stringify(cards))
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
         }
+        msg.channel.send(embed)
+      } else if (a[1] == "nnid") {
+        nnid = a[2];
+        (arrayObjectFind(msg.author.username, cards)).nnid = nnid
+        fs.writeFileSync("./cards.json", JSON.stringify(cards))
+        embed = new Discord.RichEmbed();
+        if (arrayObjectFind(msg.author.username, cards)) {
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
+          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
+            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).xboxgt == 0)) {
+            embed.addField("Xbox Gamertag: ", (arrayObjectFind(msg.author.username, cards)).xboxgt)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).psn == 0)) {
+            embed.addField("PlayStation account: ", (arrayObjectFind(msg.author.username, cards)).psn)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).switchfc == 0)) {
+            embed.addField("Nintendo Switch Friend Code: ", (arrayObjectFind(msg.author.username, cards)).switchfc)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).twitter == 0)) {
+            embed.addField("Twitter: ", (arrayObjectFind(msg.author.username, cards)).twitter)
+          }
+
+        }
+      } else if (a[1] == "xbox") {
+        nnid = a[2];
+        (arrayObjectFind(msg.author.username, cards)).xboxgt = nnid
+        fs.writeFileSync("./cards.json", JSON.stringify(cards))
+        embed = new Discord.RichEmbed();
+        if (arrayObjectFind(msg.author.username, cards)) {
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
+          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
+            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
+          }
+        }
+
+      } else if (a[1] == "psn") {
+        nnid = a[2];
+        (arrayObjectFind(msg.author.username, cards)).psn = nnid
+        fs.writeFileSync("./cards.json", JSON.stringify(cards))
+        embed = new Discord.RichEmbed();
+        if (arrayObjectFind(msg.author.username, cards)) {
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
+          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
+            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
+          }
+        }
+      } else if (a[1] == "switch") {
+        nnid = a[2];
+        (arrayObjectFind(msg.author.username, cards)).switchfc = nnid
+        fs.writeFileSync("./cards.json", JSON.stringify(cards))
+        embed = new Discord.RichEmbed();
+        if (arrayObjectFind(msg.author.username, cards)) {
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
+          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
+            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
+          }
+        }
+      } else if ((a[1] == "colour") || (a[1] == "color"))  {
+
       }
-      msg.channel.send("Give me a `verb`, please!\nNote:Start the word with a semi-colon for me to notice it\ne.g `;eating`")
-      verb1 = messageChecker(msg)
-      console.log(msg.guild.name)
-      msg.channel.send("ATTENTION!!! \nWe need `" + adj1 + "` men who have a `" + noun1 + "` and they can't be afraid of `" + noun2 + "`. They need to have lots of experience in `" + verb1 + "` and they will get a monthly salary of `$" + num1 * 1000 + "`.")
     }
   }
 })
-
-
 // !end
 client.on('message', msg => {
   if (msg.content.toLowerCase() == "!end") {
@@ -444,77 +488,23 @@ client.on('message', msg => {
     client.destroy()
   }
 })
-// !clear
-/*
-client.on('message', msg => {
-textt = msg.content.toLowerCase()
-aa = {}
-for i in string.gmatch(textt, "%S+") do
-table.insert(aa, i)
-}
-if aa[1] == "!clear" {
-loop = tonumber(aa[2])
-console.log(type(loop))
-for _, val in pairs(aa) do
-console.log(val)
-}
-for oui = 1, (loop + 1) do
-message.channel:getLastMessage():delete()
-}
-}
-}
-
 // !fix
 client.on('message', msg => {
- if (isOk(message)) {
-if msg.content.toLowerCase() == "!fix" {
-BotRole = message.guild:createRole(message.guild.me.username)
-message.channel.send("Fixing+.")
-message.guild.me:addRole(BotRole)
-BotRole:enablePermissions("manageRoles")
-BotRole:enablePermissions("manageGuild")
-message.channel.send("Done!")
-}
-}
-}
-// !unfix
-client.on('message', msg => {
-
-if msg.content.toLowerCase() == "!unfix" {
-
-message.guild.me.roles:find(function(r) return r.name == "Celle" }:delete()
-
-message.channel.send("Done!")
-}
-}
-
-// !servers
-client.on('message', msg => {
-if msg.content.toLowerCase() == "!servers" {
-client.guilds:forEach(function(b)
-message.author.send(b.name)
-}
-message:delete()
-}
-}
-
-// !permissions
-client.on('message', msg => {
-if msg.content.toLowerCase() == "!permissions" {
-message.author.send(tostring(BotRole:getPermissions()))
-message:delete()
-}
-}
-
-// !woomy
-client.on('message', msg => {
-if msg.content.toLowerCase() == "!woomy" {
- if (isOk(message)) {
-message.channel.send("WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOMY")
-}
-}
-}
-*/
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!fix") {
+      botrole = msg.guild.createRole({
+        name: client.user.username,
+      })
+      msgg = msg.channel.send("Fixing...")
+      msg.guild.me.addRole(botrole)
+      botrole.enablePermissions("manageRoles")
+      botrole.enablePermissions("manageGuild")
+      msg.channel.send("Done!")
+      msgg.delete()
+      msg.delete()
+    }
+  }
+})
 // !add (n1) (n2)
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -529,7 +519,6 @@ client.on('message', msg => {
     }
   }
 })
-
 // !multiply (n1) (n2)
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -544,7 +533,6 @@ client.on('message', msg => {
     }
   }
 })
-
 // !divide (n1) (n2)
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -559,7 +547,6 @@ client.on('message', msg => {
     }
   }
 })
-
 // !minus (n1) (n2)
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -574,29 +561,12 @@ client.on('message', msg => {
     }
   }
 })
-/*
-// !read
-client.on('message', msg => {
-textt = msg.content.toLowerCase()
-aa = {}
-for i in string.gmatch(textt, "%S+") do
-table.insert(aa, i)
-}
-if aa[1] == "!read" {
-console.log(lines_from("meme.txt"))
-}
-}
 
-
-
-
-// Running the thing
-client:run('Bot NDg3OTE4NTU0Nzc2MzM4NDMy.DnWdEg.0Tm5zm8cNxGi1QUtMCEN1OwlaEk')
-*/
-//} of jsify
+// Actually do the thing
 
 client.login(token);
-var http = require('http');
+
+// PM2 Metrics
 
 io.metric({
   type: 'metric',
@@ -605,7 +575,6 @@ io.metric({
     return client.guilds.array().length;
   }
 });
-
 io.metric({
   type: 'metric',
   name: 'Status',
@@ -614,7 +583,6 @@ io.metric({
     //  return client.user.presence.status;
   }
 });
-
 io.metric({
   type: 'metric',
   name: 'Ping',
@@ -622,7 +590,6 @@ io.metric({
     return client.ping;
   }
 });
-
 io.metric({
   type: 'metric',
   name: 'Accessible Channels',
@@ -630,7 +597,6 @@ io.metric({
     return client.channels.array().length;
   }
 });
-
 io.metric({
   type: 'metric',
   name: 'Cached users',
@@ -639,13 +605,12 @@ io.metric({
   }
 });
 
+// PM2 Actions
+
 io.action('Logging Test', (cb) => {
   console.log("test pm2 log")
-  cb({
-    success: true
-  });
+  cb("ree");
 });
-
 io.action('Set Offline', (cb) => {
   client.user.setPresence({
     game: {
@@ -666,7 +631,6 @@ io.action('Set AFK', (cb) => {
   cb("Celle is now Idle\n");
 
 });
-
 io.action('Set Online', (cb) => {
 
   ran = generateRandomNumber(1, 6)
@@ -736,7 +700,6 @@ io.action('Set Online', (cb) => {
 
   }
 });
-
 io.action('error test', (cb) => {
   cb("ERROR, CHECK ISSUES LOG");
 
@@ -744,64 +707,81 @@ io.action('error test', (cb) => {
 
   io.notifyError(new Error('This is an error'));
 });
-/*
-client.user.setPresence({
-  game: {
-    name: 'Chess with Zeus',
-    party: {
-      size: [2, 2]
-    }
-  },
-  status: 'online'
-})
-*/
-io.action('error test', (cb) => {
+io.action('testlogsrvrs', (cb) => {
+  fbnotifs.push([{
+    hi: "hoi"
+  }])
+});
+io.action('alert', (cb) => {
+
+  aons = []
+  aonc = []
+  fbnotifs.once("value", function(snapshot) {
+    snapshot.forEach(function(child) {
+      aons.push(child.val().serverid)
+      aonc.push(child.val().channelid)
+    });
+  });
+  if (aons[i]) {
+    if (aonc[i]) {
+      for (var i = 0; i < aons.length; i++) {
+        findChannel(aons[i], aonc[i]).send("test")
+        cb("Alerted " + aons.length + " servers")
+      }
+    } else {
       cb("ERROR, CHECK ISSUES LOG");
+      io.notify('aonc not defined');
+    }
+  } else {
+    cb("ERROR, CHECK ISSUES LOG");
+    io.notify('aons not defined');
+  }
 
-      io.notify('This is a notify error');
 
-      io.notifyError(new Error('This is an error'));
-      io.action('alert', (cb) => {
-        guildss = client.guilds.array()
-        //  console.log(guildss.length)
-        channlz = []
-        for (i = 0; i < guildss.length; i = i + 1) {
-          gld = guildss[i]
-          //  if (gld.name == "Testing A Bot" || gld.name == "Lol i dunno") {
-          //    console.log(i)
-          if (gld.available) {
-            ch = gld.channels.array().filter(chAnn);
-            //    console.log(ch.name)
-            //console.log(ch[0])
-            if (ch[0]) {
-              sentmess = ch[0].send("test")
-              console.log(sentmess.id)
-              channlz.push(ch[0].guild.name)
-            }
-          } else {
-            io.notifyError(new Error('Unavailable guild'));
-          }
-          //  }
-        }
-        if (channlz.length != 0) {
-          cb("Succesfully notified " + channlz.length + " server(s).\n");
-          io.metric({
-            type: 'metric',
-            name: 'Alerted servers',
-            value: function() {
-              return channlz.length;
-            }
-          });
-
-        } else {
-          io.notify('Error: Empty array of servers');
-          cb("ERROR, CHECK ISSUES LOG\n");
-        }
+  /*
+    guildss = client.guilds.array()
+    //  console.log(guildss.length)
+    channlz = []
+    for (i = 0; i < guildss.length; i = i + 1) {
+      gld = guildss[i]
+    //  if (gld.name == "Testing A Bot" || gld.id == 433228421196414976 || gld.id == 502903541367701534 || gld.id == 439805212107210752 || gld.id == 474778374448087050) {
+        //    console.log(i)
+    //    if (gld.available) {
+          ch = gld.channels.array().filter(chAnn);
+          //    console.log(ch.name)
+          //console.log(ch[0])
+      //    if (ch[0]) {
+            sentmess = ch[0].send("_A bot's life only truly begins once it has been verified,_\n-MLK\nWell, Mr King, I suppose my life as a bot\n_Has only just begun_\nhttps://discordbots.org/bot/487918554776338432")
+            console.log(sentmess.id)
+            channlz.push(ch[0].guild.name)
+        //  }
+    //    } else {
+          io.notifyError(new Error('Unavailable guild'));
+      //  }
+  //    }
+  //  }
+  //  if (channlz.length != 0) {
+      cb("Succesfully notified " + channlz.length + " server(s).\n");
+      io.metric({
+        type: 'metric',
+        name: 'Alerted servers',
+        value: function() {
+          return channlz.length;
+       }
       });
-    })
-    /*
-    http.createServer(function (req, res) {
-      res.write("I'm in");
-      res.end();
-    }).listen(8080);
+
+  //  } else {
+      io.notify('Error: Empty array of servers');
+      cb("ERROR, CHECK ISSUES LOG\n");
+    //}
     */
+});
+io.action('Servers', (cb) => {
+  guildss = client.guilds.array()
+  //  console.log(guildss.length)
+  guildi = []
+  guildn = []
+  fbservers.set({})
+  require("./cellessupersecretcode.js")
+  cb(guildi.length + " guilds, names are: " + guildn + "and IDs are: " + guildi)
+})
