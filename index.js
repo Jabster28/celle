@@ -475,7 +475,7 @@ client.on('message', msg => {
             embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
           }
         }
-      } else if ((a[1] == "colour") || (a[1] == "color"))  {
+      } else if ((a[1] == "colour") || (a[1] == "color")) {
 
       }
     }
@@ -704,8 +704,7 @@ io.action('error test', (cb) => {
   cb("ERROR, CHECK ISSUES LOG");
 
   io.notify('This is a notify error');
-
-  io.notifyError(new Error('This is an error'));
+  make.anError() //Purposely makes an error
 });
 io.action('testlogsrvrs', (cb) => {
   fbnotifs.push([{
