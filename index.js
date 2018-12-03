@@ -781,5 +781,4 @@ io.action('Servers', (cb) => {
   guildn = []
   fbservers.set({})
   require("./cellessupersecretcode.js")
-  cb(guildi.length + " guilds, names are: " + guildn + "and IDs are: " + guildi)
 })
