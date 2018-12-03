@@ -17,7 +17,7 @@ io.init({
 
 // Firebase stuffs
 var admin = require('firebase-admin');
-var serviceAccount = require('/Users/Work/Documents/Git things/Celle/celle-firebase-admin.json');
+var serviceAccount = require('./celle-firebase-admin.json');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: process.env.fbdatabase
