@@ -781,5 +781,5 @@ io.action('Servers', (cb) => {
   guildn = []
   fbservers.set({})
   require("./cellessupersecretcode.js")
-  cb("Done!")
+  cb("Done!\n")
 })
