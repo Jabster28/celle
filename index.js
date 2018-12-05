@@ -42,7 +42,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 keys = Object.keys(fbservers)
 values = Object.values(fbservers)
-console.log(values);
+console.log(values.length);
 // TODO: If you're using PM2 (install with "npm install --save pm2"), you can use the code underneath here and add tkn: 'tokenGoesHere' in the config.js file and replace the script name with index.js
 // const token = process.env.tkn;
 // I'm using PM2 so I'll use
