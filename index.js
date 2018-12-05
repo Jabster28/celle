@@ -730,6 +730,7 @@ io.action('alert', (cb) => {
       aons.push(child.val().serverid)
       console.log(child.val().serverid)
       aonc.push(child.val().channelid)
+      aons.push("debug")
     });
   });
   console.log(aons);
