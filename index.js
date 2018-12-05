@@ -162,7 +162,7 @@ client.on('message', msg => {
 })
 //!notify
 client.on('message', msg => {
-  if (isOk(msg)) {
+  if (isOk(msg) && msg.member.hasPermission("MANAGE_ROLES")) {
     if (msg.content.toLowerCase() == '!notify') {
       fbnotifs.push({
         channelname: "#" + msg.channel.name,
