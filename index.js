@@ -747,7 +747,10 @@ io.action('alert', (cb) => {
     cb("ERROR, CHECK ISSUES LOG");
     io.notify('aons not defined');
   }
-
+   if (aons.length == 0) {
+     io.notify("aons is 0")
+     cb("ERROR, CHECK ISSUES LOG")
+   }
 
   /*
     guildss = client.guilds.array()
