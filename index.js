@@ -732,12 +732,12 @@ io.action('alert', (cb) => {
       aonc.push(child.val().channelid)
     });
   });
+  for (var i = 0; i < aons.length; i++) {
   if (aons[i]) {
     if (aonc[i]) {
-      for (var i = 0; i < aons.length; i++) {
         findChannel(aons[i], aonc[i]).send("test")
         cb("Alerted " + aons.length + " servers")
-      }
+
     } else {
       cb("ERROR, CHECK ISSUES LOG");
       io.notify('aonc not defined');
