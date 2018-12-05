@@ -128,7 +128,7 @@ function arrayObjectFind(item, array) {
 
 function findChannel(guld, channelid) {
   for (var i = 0; i < guld.channels.array().length; i++) {
-    channelll = guld.channels.array()[i] 
+    chanelll = guld.channels.array()[i] 
     if (chanelll.id == channelid) {
       return chanelll
     }
