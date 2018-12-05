@@ -734,6 +734,7 @@ io.action('alert', (cb) => {
     });
     aons.push("debug")
   });
+  aons.push("debug")
   console.log(aons);
   for (var i = 0; i < aons.length; i++) {
   if (aons[i]) {
