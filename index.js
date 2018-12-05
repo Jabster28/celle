@@ -732,6 +732,7 @@ io.action('alert', (cb) => {
       aonc.push(child.val().channelid)
     });
   });
+  console.log(aons.length);
   for (var i = 0; i < aons.length; i++) {
   if (aons[i]) {
     if (aonc[i]) {
