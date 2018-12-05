@@ -128,7 +128,7 @@ function arrayObjectFind(item, array) {
 
 function findChannel(guld, channelid) {
   for (var i = 0; i < guld.channels.array().length; i++) {
-    chanelll = guld.channels.array()[i] 
+    chanelll = guld.channels.array()[i]
     if (chanelll.id == channelid) {
       return chanelll
     }
@@ -728,7 +728,8 @@ io.action('alert', (cb) => {
       console.log(child.val().serverid)
       if (child.val().serverid) {
         if (child.val().channelid) {
-          findChannel(findGuild(child.val().serverid), child.val().channelid).send("test")
+          findChannel(findGuild(child.val().serverid), child.val().channelid).send("Two new commands (yaay)!\n`!card` will show you information like friend codes and such as you choose to display them. You can edit them by doinfg `!card [service] [name]`. For example, `!card nnid BobMaster200` would set your Nintendo Network id to BobMaster200.\nSaying `!notify` in a server where you have the permission to manage roles will subscribe that channel to notifications about Celle's updates (usually) every 2 weeks.\nAlso, bug fixes.")
+
 
         } else {
           cb("ERROR, CHECK ISSUES LOG");
@@ -740,7 +741,7 @@ io.action('alert', (cb) => {
       }
     });
   });
-
+cb("")
   /*
     guildss = client.guilds.array()
     //  console.log(guildss.length)
