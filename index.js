@@ -785,6 +785,7 @@ io.action('alert', (cb) => {
       cb("ERROR, CHECK ISSUES LOG\n");
     //}
     */
+  }
 });
 io.action('Servers', (cb) => {
   guildss = client.guilds.array()
