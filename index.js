@@ -723,18 +723,15 @@ io.action('testlogsrvrs', (cb) => {
   }])
 });
 io.action('alert', (cb) => {
-  aons = []
-  aonc = []
+var aons = []
+var aonc = []
   fbnotifs.once("value", function(snapshot) {
     snapshot.forEach(function(child) {
       aons.push(child.val().serverid)
       console.log(child.val().serverid)
       aonc.push(child.val().channelid)
-      aons.push("debug")
     });
-    aons.push("debug")
   });
-  aons.push("debug")
   console.log(aons);
   for (var i = 0; i < aons.length; i++) {
   if (aons[i]) {
