@@ -732,6 +732,7 @@ io.action('alert', (cb) => {
       aonc.push(child.val().channelid)
       aons.push("debug")
     });
+    aons.push("debug")
   });
   console.log(aons);
   for (var i = 0; i < aons.length; i++) {
