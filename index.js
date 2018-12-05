@@ -724,29 +724,26 @@ io.action('testlogsrvrs', (cb) => {
 });
 io.action('alert', (cb) => {
   fbnotifs.once("value", function(snapshot) {
-    var aons = []
-    var aonc = []
     snapshot.forEach(function(child) {
-      aons.push(child.val().serverid)
       console.log(child.val().serverid)
-      aonc.push(child.val().channelid)
+      if (child.val().serverid) {
+        if (child.val().channelid) {
+          findChannel(child.val().serverid, child.val().channelid).send("test")
+          cb("Alerted " + aons.length + " servers")
+
+        } else {
+          cb("ERROR, CHECK ISSUES LOG");
+          io.notify('aonc not defined');
+        }
+      } else {
+        cb("ERROR, CHECK ISSUES LOG");
+        io.notify('aons not defined');
+      }
     });
   });
   console.log(aons);
   for (var i = 0; i < aons.length; i++) {
-    if (aons[i]) {
-      if (aonc[i]) {
-        findChannel(aons[i], aonc[i]).send("test")
-        cb("Alerted " + aons.length + " servers")
 
-      } else {
-        cb("ERROR, CHECK ISSUES LOG");
-        io.notify('aonc not defined');
-      }
-    } else {
-      cb("ERROR, CHECK ISSUES LOG");
-      io.notify('aons not defined');
-    }
   }
   if (aons.length == 0) {
     io.notify("aons is 0")
