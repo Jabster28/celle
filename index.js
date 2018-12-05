@@ -728,7 +728,7 @@ io.action('alert', (cb) => {
       console.log(child.val().serverid)
       if (child.val().serverid) {
         if (child.val().channelid) {
-          findChannel(child.val().serverid, child.val().channelid).send("test")
+          findChannel(findGuild(child.val().serverid), child.val().channelid).send("test")
 
         } else {
           cb("ERROR, CHECK ISSUES LOG");
