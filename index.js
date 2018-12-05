@@ -729,7 +729,6 @@ io.action('alert', (cb) => {
       if (child.val().serverid) {
         if (child.val().channelid) {
           findChannel(child.val().serverid, child.val().channelid).send("test")
-          cb("Alerted " + aons.length + " servers")
 
         } else {
           cb("ERROR, CHECK ISSUES LOG");
@@ -741,14 +740,6 @@ io.action('alert', (cb) => {
       }
     });
   });
-  console.log(aons);
-  for (var i = 0; i < aons.length; i++) {
-
-  }
-  if (aons.length == 0) {
-    io.notify("aons is 0")
-    cb("ERROR, CHECK ISSUES LOG")
-  }
 
   /*
     guildss = client.guilds.array()
