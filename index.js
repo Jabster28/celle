@@ -398,6 +398,18 @@ client.on('message', msg => {
           if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
             embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
           }
+          if (!((arrayObjectFind(msg.author.username, cards)).xboxgt == 0)) {
+            embed.addField("Xbox gamer tag: ", (arrayObjectFind(msg.author.username, cards)).xboxgt)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).twitter == 0)) {
+            embed.addField("Twitter: ", (arrayObjectFind(msg.author.username, cards)).twitter)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).psn == 0)) {
+            embed.addField("PlayStation: ", (arrayObjectFind(msg.author.username, cards)).psn)
+          }
+          if (!((arrayObjectFind(msg.author.username, cards)).switchfc == 0)) {
+            embed.addField("Switch Friend Code: ", (arrayObjectFind(msg.author.username, cards)).switchfc)
+          }
         } else {
           cards.push({
             "name": msg.author.username,
