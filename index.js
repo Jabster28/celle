@@ -723,7 +723,6 @@ io.action('testlogsrvrs', (cb) => {
   }])
 });
 io.action('alert', (cb) => {
-
   aons = []
   aonc = []
   fbnotifs.once("value", function(snapshot) {
@@ -748,6 +747,7 @@ io.action('alert', (cb) => {
     cb("ERROR, CHECK ISSUES LOG");
     io.notify('aons not defined');
   }
+}
    if (aons.length == 0) {
      io.notify("aons is 0")
      cb("ERROR, CHECK ISSUES LOG")
@@ -790,7 +790,7 @@ io.action('alert', (cb) => {
       cb("ERROR, CHECK ISSUES LOG\n");
     //}
     */
-  }
+  
 });
 io.action('Servers', (cb) => {
   guildss = client.guilds.array()
