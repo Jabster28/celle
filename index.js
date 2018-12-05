@@ -728,7 +728,7 @@ io.action('alert', (cb) => {
   fbnotifs.once("value", function(snapshot) {
     snapshot.forEach(function(child) {
       aons.push(child.val().serverid)
-      console.log(child.val())
+      console.log(child.val().serverid)
       aonc.push(child.val().channelid)
     });
   });
@@ -790,7 +790,7 @@ io.action('alert', (cb) => {
       cb("ERROR, CHECK ISSUES LOG\n");
     //}
     */
-  
+
 });
 io.action('Servers', (cb) => {
   guildss = client.guilds.array()
