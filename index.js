@@ -728,9 +728,11 @@ io.action('alert', (cb) => {
   aonc = []
   fbnotifs.once("value", function(snapshot) {
     snapshot.forEach(function(child) {
-      aons.push(child.val().serverid)
+      aons.push(child.serverid)
       console.log(child)
-      aonc.push(child.val().channelid)
+      console.log(child.val())
+      console.log(child.value)
+      aonc.push(child.channelid)
     });
   });
   console.log(aons.length);
