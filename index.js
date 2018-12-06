@@ -530,6 +530,34 @@ client.on('message', msg => {
     }
   }
 })
+//!yds
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!yds") {
+      embed = new Discord.RichEmbed();
+      embed.setAuthor(msg.author.username, msg.author.avatarURL)
+      embed.setColor("BLUE")
+      const yds = "https://i.imgur.com/38BlfVp.png?1"
+      embed.setImage(yds)
+      msg.channel.send(embed)
+      msg.delete()
+    }
+  }
+})
+//!hmm
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!hmm") {
+      embed = new Discord.RichEmbed();
+      embed.setAuthor(msg.author.username, msg.author.avatarURL)
+      embed.setColor("BLUE")
+      const hmm = "https://aa0q1c6q9h-flywheel.netdna-ssl.com/wp-content/dquploads/challenge-considered-guy.png"
+      embed.setImage(hmm)
+      msg.channel.send(embed)
+      msg.delete()
+    }
+  }
+})
 // !add (n1) (n2)
 client.on('message', msg => {
   if (isOk(msg)) {
