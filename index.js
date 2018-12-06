@@ -521,7 +521,7 @@ client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!yds") {
       embed = new Discord.RichEmbed();
-      embed.setAuthor(msg.username, msg.avatarURL)
+      embed.setAuthor(msg.author.username, msg.author.avatarURL)
       embed.setColor("BLUE")
       embed.setImage("./customImages/yds.jpg")
       msg.channel.send(embed)
