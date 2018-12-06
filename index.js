@@ -530,15 +530,15 @@ client.on('message', msg => {
     }
   }
 })
-//!yds
+//!crl
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!yds") {
+    if (msg.content.toLowerCase() == "!crl") {
       embed = new Discord.RichEmbed();
       embed.setAuthor(msg.author.username, msg.author.avatarURL)
       embed.setColor("BLUE")
-      const yds = "https://i.imgur.com/38BlfVp.png?1"
-      embed.setImage(yds)
+      const crl = "https://i.kym-cdn.com/entries/icons/original/000/000/635/1260585284155_copy.jpg"
+      embed.setImage(crl)
       msg.channel.send(embed)
       msg.delete()
     }
