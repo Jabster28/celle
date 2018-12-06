@@ -523,7 +523,7 @@ client.on('message', msg => {
       embed = new Discord.RichEmbed();
       embed.setAuthor(msg.author.username, msg.author.avatarURL)
       embed.setColor("BLUE")
-      const yds = "./customImages/yds.jpg"
+      const yds = "https://i.imgur.com/38BlfVp.png?1"
       embed.setImage(yds)
       msg.channel.send(embed)
       msg.delete()
