@@ -166,7 +166,7 @@ client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == '!tokens') {
       childd = false;
-      fbnotifs.once("value", function(snapshot) {
+      fbink.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
           if (child.id) {
             if (child.id == msg.author.id) {
@@ -176,7 +176,7 @@ client.on('message', msg => {
           }
         })
       })
-      if (childd) {} else {
+      if (!childd) {
         fbink.push({
           id: msg.author.id,
           tokens: 200,
