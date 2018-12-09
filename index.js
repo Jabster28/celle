@@ -181,7 +181,7 @@ client.on('message', msg => {
 })
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!token") {
+    if (msg.content.toLowerCase() == "!maketokenaccount") {
 
 
       fbink.push({
@@ -189,10 +189,33 @@ client.on('message', msg => {
         tokens: 200,
         daily: false
       })
-      msg.channel.send("You have 200 tokens!")
+      msg.channel.send("You now have 200 tokens! Go gambling with !gamble [tokens]")
+
     }
   }
 })
+// !gamble
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ")
+    if (mess[0] == "!gamble") {
+      if (mess[1]) {
+        if (tonumber(mess[1])) {
+          fbink.once("value", function(snapshot) {
+            snapshot.forEach(function(child) {
+              childd = child.val()
+              if (childd.id == msg.author.id) {
+                if (tonumber(mess[1]) <= child.tokens) {
+                  msg.channel.send("You can gamble!")
+                }
+              }
+            })
+          })
+        }
+      }
+    }
+  }
+});
 //!notify
 client.on('message', msg => {
   if (isOk(msg) && (msg.member.hasPermission("MANAGE_ROLES") || msg.author.id == 350930610719817728)) {
@@ -234,6 +257,7 @@ client.on('message', msg => {
     }
   }
 })
+
 // !me
 client.on('message', msg => {
   if (isOk(msg)) {
