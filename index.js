@@ -176,7 +176,7 @@ client.on('message', msg => {
           }
         })
       })
-      if (childdd) {} else {
+      if (typeof childdd === 'undefined') {
         console.log("not childid")
         fbink.push({
           id: msg.author.id,
