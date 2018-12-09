@@ -214,6 +214,7 @@ client.on('message', msg => {
                   msg.channel.send("You can gamble!")
                 } else {
                   console.log(tonumber(child.tokens))
+                  console.log(child.tokens)
                   console.log(typeof tonumber(child.tokens));
                 }
               }
