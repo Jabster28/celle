@@ -189,7 +189,15 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!invite") {
-      msg.channel.send("Here's the link to my website! \n https://discordbots.org/bot/487918554776338432\n")
+      msg.channel.send("Here's the link to my website where you can do things like invite me to your server or vote for me! \n https://discordbots.org/bot/487918554776338432\n")
+    }
+  }
+})
+// !web
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!web") || (msg.content.toLowerCase() == "!website") {
+      msg.channel.send("Here's the link to my website where you can do things like invite me to your server or vote for me! \n https://discordbots.org/bot/487918554776338432\n")
     }
   }
 })
