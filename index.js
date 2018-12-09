@@ -182,7 +182,7 @@ client.on('message', msg => {
           tokens: 200,
           daily: false
         })
-        msg.channel.send("You have 200 tokens.")
+        msg.channel.send("You have 200 tokens!")
       }
     }
   }
