@@ -24,7 +24,7 @@ admin.initializeApp({
 var db = admin.database();
 var storage = admin.storage();
 var fbtemp = db.ref("temp/");
-var fbink = db.ref("inktokens/");
+var fbink = db.("inktokens/");
 var fbnotifs = db.ref("notifications/");
 fbservers = fbtemp.child("servers");
 io.action('FB test', (cb) => {
@@ -170,12 +170,12 @@ client.on('message', msg => {
         snapshot.forEach(function(child) {
             if (child.id == msg.author.id) {
               console.log("childid is msgid")
-              childd = true;
+              nochild = true
               msg.channel.send("You have " + child.tokens + " tokens.")
             }
         })
       })
-      if (!childd) {
+      if (nochild) {
         console.log("not childid")
         fbink.push({
           id: msg.author.id,
