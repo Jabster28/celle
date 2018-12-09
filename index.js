@@ -199,13 +199,18 @@ client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ")
     if (mess[0] == "!gamble") {
+      console.log("gamble");
       if (mess[1]) {
+        console.log("mess1");
         if (tonumber(mess[1])) {
+          console.log("number mess1");
           fbink.once("value", function(snapshot) {
             snapshot.forEach(function(child) {
               childd = child.val()
               if (childd.id == msg.author.id) {
+                console.log("chillmsgid");
                 if (tonumber(mess[1]) <= child.tokens) {
+                  console.log("enuffmoney");
                   msg.channel.send("You can gamble!")
                 }
               }
