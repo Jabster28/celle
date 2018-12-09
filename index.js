@@ -56,8 +56,8 @@ const keep_alive = require('./keep_alive.js')
 
 // Function defs
 
-function generateRandomNumber(min, max) {
-  return Math.floor(Math.random() * 5) + 1;
+function generateRandomNumber(max) {
+  return Math.floor(Math.random() * max) + 1;
 }
 
 function chAnn(ch) {
@@ -211,8 +211,21 @@ client.on('message', msg => {
                 console.log("chillmsgid");
                 if (tonumber(mess[1]) <= childd.tokens) {
                   console.log("enuffmoney");
-                  msg.channel.send("You can gamble!")
+                  ran = generateRandomNumber(10)
+                  if (ran <= 5) {
+                    if (ran <= childd.tokens) {
+
+                      msg.channel.send("Oof, you lost " + ran * 10 + " tokens :/");
+                      childd.tokens -= ran
+                    } else {
+                    msg.channel.send("Oof, you lost all of your tokens :/");
+                    childd.tokens = 0
+                  }
                 } else {
+                  msg.channel.send("You got " + ran*10 + " tokens!");
+                  childd.tokens += ran*10
+                }
+              } else {
                   console.log(tonumber(childd.tokens))
                   console.log(childd.tokens)
                   console.log(typeof tonumber(childd.tokens));
@@ -760,7 +773,7 @@ io.action('Set AFK', (cb) => {
 });
 io.action('Set Online', (cb) => {
 
-  ran = generateRandomNumber(1, 6)
+  ran = generateRandomNumber(5)
   if (ran == 1) {
     client.user.setPresence({
       game: {
