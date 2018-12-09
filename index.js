@@ -179,10 +179,10 @@ client.on('message', msg => {
       if (childd) {} else {
         fbink.push({
           id: msg.author.id,
-          tokens: 0,
+          tokens: 200,
           daily: false
         })
-        msg.channel.send("You have 0 tokens.")
+        msg.channel.send("You have 200 tokens.")
       }
     }
   }
