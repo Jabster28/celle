@@ -167,22 +167,21 @@ client.on('message', msg => {
     if (msg.content.toLowerCase() == '!tokens') {
       fbnotifs.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
-        if (child.id) {
-          if (child.id == msg.author.id) {
-            childd = true;
-            msg.channel.send("You have " + child.tokens + " tokens.")
+          if (child.id) {
+            if (child.id == msg.author.id) {
+              childd = true;
+              msg.channel.send("You have " + child.tokens + " tokens.")
+            }
           }
-        }
         })
       })
-      if (!childd) {
+      if (childd) {} else {
         fbink.push({
           id: msg.author.id,
           tokens: 0,
           daily: false
         })
         msg.channel.send("You have " + child.tokens + " tokens.")
-
       }
     }
   }
