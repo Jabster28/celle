@@ -168,6 +168,7 @@ client.on('message', msg => {
       childd = false;
       fbink.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
+          child = child.val()
             if (child.id == msg.author.id) {
               console.log("childid is msgid")
               nochild = true
