@@ -169,7 +169,9 @@ client.on('message', msg => {
       fbink.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
           if (child.id) {
+            console.log("childid")
             if (child.id == msg.author.id) {
+              console.log("childid is msgid")
               childd = true;
               msg.channel.send("You have " + child.tokens + " tokens.")
             }
@@ -177,6 +179,7 @@ client.on('message', msg => {
         })
       })
       if (!childd) {
+        console.log("not childid")
         fbink.push({
           id: msg.author.id,
           tokens: 200,
