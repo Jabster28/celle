@@ -165,18 +165,18 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == '!tokens') {
-      childdd = false;
+
       fbink.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
           childd = child.val()
-            if (childd.id == msg.author.id) {
-              console.log("childid is msgid")
-              childdd = true
-              msg.channel.send("You have " + childd.tokens + " tokens.")
-            }
+          if (childd.id == msg.author.id) {
+            console.log("childid is msgid")
+            childdd = true
+            msg.channel.send("You have " + childd.tokens + " tokens.")
+          }
         })
       })
-      if (!childdd) {
+      if (childdd) {} else {
         console.log("not childid")
         fbink.push({
           id: msg.author.id,
