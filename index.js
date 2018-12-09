@@ -168,15 +168,15 @@ client.on('message', msg => {
       childd = false;
       fbink.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
-          child = child.val()
-            if (child.id == msg.author.id) {
+          childd = child.val()
+            if (childd.id == msg.author.id) {
               console.log("childid is msgid")
               nochild = true
-              msg.channel.send("You have " + child.tokens + " tokens.")
+              msg.channel.send("You have " + childd.tokens + " tokens.")
             }
         })
       })
-      if (nochild) {
+      if (!childd) {
         console.log("not childid")
         fbink.push({
           id: msg.author.id,
