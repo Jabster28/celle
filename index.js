@@ -165,6 +165,7 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == '!tokens') {
+      childd = false;
       fbnotifs.once("value", function(snapshot) {
         snapshot.forEach(function(child) {
           if (child.id) {
