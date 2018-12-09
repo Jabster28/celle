@@ -42,6 +42,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 keys = Object.keys(fbservers)
 values = Object.values(fbservers)
+keys1 = Object.keys(fbink)
+values1 = Object.values(fbink)
 console.log(values.length);
 // TODO: If you're using PM2 (install with "npm install --save pm2"), you can use the code underneath here and add tkn: 'tokenGoesHere' in the config.js file and replace the script name with index.js
 // const token = process.env.tkn;
@@ -160,6 +162,31 @@ client.on('message', msg => {
     }
   }
 })
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == '!tokens') {
+      fbnotifs.once("value", function(snapshot) {
+        snapshot.forEach(function(child) {
+        if (child.id) {
+          if (child.id == msg.author.id) {
+            childd = true;
+            msg.channel.send("You have " + child.tokens + " tokens.")
+          }
+        }
+        })
+      })
+      if (!childd) {
+        fbink.push({
+          id: msg.author.id,
+          tokens: 0,
+          daily: false
+        })
+        msg.channel.send("You have " + child.tokens + " tokens.")
+
+      }
+    }
+  }
+})
 //!notify
 client.on('message', msg => {
   if (isOk(msg) && (msg.member.hasPermission("MANAGE_ROLES") || msg.author.id == 350930610719817728)) {
@@ -196,7 +223,7 @@ client.on('message', msg => {
 // !web
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == "!web") || (msg.content.toLowerCase() == "!website") {
+    if ((msg.content.toLowerCase() == "!web") || (msg.content.toLowerCase() == "!website")) {
       msg.channel.send("Here's the link to my website where you can do things like invite me to your server or vote for me! \n https://discordbots.org/bot/487918554776338432\n")
     }
   }
@@ -791,7 +818,7 @@ io.action('alert', (cb) => {
       }
     });
   });
-cb("")
+  cb("")
   /*
     guildss = client.guilds.array()
     //  console.log(guildss.length)
