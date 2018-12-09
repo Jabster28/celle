@@ -209,7 +209,7 @@ client.on('message', msg => {
               childd = child.val()
               if (childd.id == msg.author.id) {
                 console.log("chillmsgid");
-                if (tonumber(mess[1]) <= tonumber(child.tokens)) {
+                if (tonumber(mess[1]) <= child.tokens) {
                   console.log("enuffmoney");
                   msg.channel.send("You can gamble!")
                 } else {
