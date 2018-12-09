@@ -176,15 +176,20 @@ client.on('message', msg => {
           }
         })
       })
-      if (typeof childdd === 'undefined') {
-        console.log("not childid")
-        fbink.push({
-          id: msg.author.id,
-          tokens: 200,
-          daily: false
-        })
-        msg.channel.send("You have 200 tokens!")
-      }
+    }
+  }
+})
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!token") {
+
+
+      fbink.push({
+        id: msg.author.id,
+        tokens: 200,
+        daily: false
+      })
+      msg.channel.send("You have 200 tokens!")
     }
   }
 })
