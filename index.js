@@ -212,6 +212,9 @@ client.on('message', msg => {
                 if (tonumber(mess[1]) <= tonumber(child.tokens)) {
                   console.log("enuffmoney");
                   msg.channel.send("You can gamble!")
+                } else {
+                  console.log(tonumber(child.tokens))
+                  console.log(typeof tonumber(child.tokens));
                 }
               }
             })
