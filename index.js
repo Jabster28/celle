@@ -171,7 +171,7 @@ client.on('message', msg => {
           childd = child.val()
             if (childd.id == msg.author.id) {
               console.log("childid is msgid")
-              nochild = true
+              childd = true
               msg.channel.send("You have " + childd.tokens + " tokens.")
             }
         })
