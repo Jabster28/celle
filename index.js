@@ -24,7 +24,7 @@ admin.initializeApp({
 var db = admin.database();
 var storage = admin.storage();
 var fbtemp = db.ref("temp/");
-
+var fbink = db.ref("inktokens/");
 var fbnotifs = db.ref("notifications/");
 fbservers = fbtemp.child("servers");
 io.action('FB test', (cb) => {
