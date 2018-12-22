@@ -617,6 +617,20 @@ client.on('message', msg => {
     }
   }
 })
+//!post
+client.on('message', msg => {
+  if (isOk(msg) && (msg.member.hasPermission("MANAGE_ROLES") || msg.author.id == 350930610719817728)) {
+    if (msg.content.toLowerCase() == '!post') {
+       embed = new Discord.RichEmbed();
+      embed.setAuthor(msg.mentions.users.array()[0].username, msg.mentions.users.array()[0].avatarURL)
+      embed.setColor("BLUE")
+      const yds = msg.attachments.array()[0].proxyURL
+      embed.setImage(crl)
+      msg.channel.send(embed)
+      msg.delete()
+    }
+  }
+})
 //!crl
 client.on('message', msg => {
   if (isOk(msg)) {
