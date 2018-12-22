@@ -197,10 +197,12 @@ client.on('message', msg => {
 // !deyeet
 client.on('message', msg => {
   if (isOk(msg)) {
+      if (isOk(msg) && (msg.member.hasPermission("MANAGE_ROLES") || msg.author.id == 350930610719817728)) {
     mess = msg.content.toLowerCase().split(" ")
-    if (mess[0] == "!deyeet") {
+    if (mess[0] == "!deyeet" && msg.) {
       msg.channel.bulkDelete(mess[1])
     }
+      }
   }
 })
 // !gamble
