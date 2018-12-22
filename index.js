@@ -194,6 +194,15 @@ client.on('message', msg => {
     }
   }
 })
+// !deyeet
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ")
+    if (mess[0] == "!deyeet") {
+      msg.channel.bulkDelete(mess[1])
+    }
+  }
+})
 // !gamble
 client.on('message', msg => {
   if (isOk(msg)) {
