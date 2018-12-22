@@ -627,7 +627,7 @@ client.on('message', msg => {
       embed.setAuthor(msg.mentions.users.array()[0].username, msg.mentions.users.array()[0].avatarURL)
       embed.setColor("BLUE")
       const yds = msg.attachments.array()[0].proxyURL
-      embed.addField("test", yds)
+      embed.setImage(yds)
       msg.channel.send(embed)
       msg.delete()
     }
