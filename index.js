@@ -162,6 +162,7 @@ client.on('message', msg => {
     }
   }
 })
+// !tokens
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == '!tokens') {
@@ -179,6 +180,7 @@ client.on('message', msg => {
     }
   }
 })
+// !maketokenaccount
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!maketokenaccount") {
@@ -197,12 +199,12 @@ client.on('message', msg => {
 // !deyeet
 client.on('message', msg => {
   if (isOk(msg)) {
-      if (isOk(msg) && (msg.member.hasPermission("MANAGE_ROLES") || msg.author.id == 350930610719817728)) {
-    mess = msg.content.toLowerCase().split(" ")
-    if (mess[0] == "!deyeet") {
-      msg.channel.bulkDelete(mess[1])
-    }
+    if (isOk(msg) && (msg.member.hasPermission("MANAGE_MESSAGES") || msg.author.id == 350930610719817728)) {
+      mess = msg.content.toLowerCase().split(" ")
+      if (mess[0] == "!deyeet") {
+        msg.channel.bulkDelete(mess[1])
       }
+    }
   }
 })
 // !gamble
@@ -229,14 +231,14 @@ client.on('message', msg => {
                       msg.channel.send("Oof, you lost " + ran * 10 + " tokens :/");
                       childd.tokens -= ran
                     } else {
-                    msg.channel.send("Oof, you lost all of your tokens :/");
-                    childd.tokens = 0
+                      msg.channel.send("Oof, you lost all of your tokens :/");
+                      childd.tokens = 0
+                    }
+                  } else {
+                    msg.channel.send("You got " + ran * 10 + " tokens!");
+                    childd.tokens += ran * 10
                   }
                 } else {
-                  msg.channel.send("You got " + ran*10 + " tokens!");
-                  childd.tokens += ran*10
-                }
-              } else {
                   console.log(tonumber(childd.tokens))
                   console.log(childd.tokens)
                   console.log(typeof tonumber(childd.tokens));
@@ -361,7 +363,7 @@ client.on('message', msg => {
 // !commands
 client.on('message', msg => {
   if (msg.content == '!commands') {
-    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n  `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands \n**-- WARNING --**\n**The commands below this line are still in WIP and thus should not be called.**\n`!permissions` Check the available permissions \n`!wordmaker` to play a sentence-making game \n")
+    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]` ~~Remove~~ Deyeet the said amount of messages (not including that one) ")
   }
 })
 // !advert
