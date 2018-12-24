@@ -363,7 +363,7 @@ client.on('message', msg => {
 // !commands
 client.on('message', msg => {
   if (msg.content == '!commands') {
-    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]` ~~Remove~~ Deyeet the said amount of messages (not including that one) ")
+    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]` ~~Delete~~ Deyeet the said amount of messages (not including that one) \n_**TIME TO DEDEDEYEET THAT MESSAGE**_")
   }
 })
 // !advert
