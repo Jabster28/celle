@@ -153,10 +153,11 @@ client.on('ready', () => {
   console.log("I'm in")
 });
 
-// !Celle
+// !celle
+// !help
 client.on('message', msg => {
   if (isOk(msg)) {
-    if (msg.content.toLowerCase() == '!celle') {
+    if (msg.content.toLowerCase() == '!celle' || (msg.content.toLowerCase() == '!help') {
       msg.channel.send("Hi! I'm Celle, a bot made by Justyn (Jabster28)! Right now, I'm still learning to do lots of things, but I can do simple things like `!add 1 1` to do arithmetic or `!id` to give you your ID. I hope that I make your server 11 times better! :D")
       msg.channel.send("Tip: Use !commands to see what I can do")
     }
