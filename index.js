@@ -203,6 +203,7 @@ client.on('message', msg => {
     if (isOk(msg) && (msg.member.hasPermission("MANAGE_MESSAGES") || msg.author.id == 350930610719817728)) {
       mess = msg.content.toLowerCase().split(" ")
       if (mess[0] == "!deyeet") {
+        msg.delete()
         msg.channel.bulkDelete(mess[1])
       }
     }
