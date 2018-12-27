@@ -368,6 +368,7 @@ client.on('message', msg => {
         embed = new Discord.RichEmbed();
         embed.addField((msg.mentions.users.array()[0].username + "'s profile picture: '"), msg.member.permissions.toArray())
         embed.setImage(msg.mentions.users.array()[0].avatarURL)
+        embed.setFooter(msg.mentions.users.array()[0].avatarURL)
         msg.channel.send(embed)
       }
     }
