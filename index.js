@@ -366,7 +366,6 @@ client.on('message', msg => {
     if (mess[0] == "!pfp") {
       if (msg.mentions.users.array()[0]) {
         embed = new Discord.RichEmbed();
-        embed.setAuthor(msg.mentions.users.array()[0].username, msg.mentions.users.array()[0].avatar)
         embed.addField((msg.mentions.users.array()[0].username + "'s profile picture: '"), msg.member.permissions.toArray())
         embed.setImage(msg.mentions.users.array()[0].avatarURL)
         msg.channel.send(embed)
