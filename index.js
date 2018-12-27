@@ -29,7 +29,6 @@ var fbnotifs = db.ref("notifications/");
 fbservers = fbtemp.child("servers");
 io.action('FB test', (cb) => {
   var fbservers = fbtemp.child("servers");
-
   usersRef.set({});
   cb("ree")
 });
