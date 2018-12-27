@@ -308,8 +308,6 @@ client.on('message', msg => {
         console.log("ment")
         console.log(msg.mentions.users.array()[0])
 
-        embed = new Discord.RichEmbed();
-        embed.addField("Permissions: ", msg.member.permissions.toArray())
 
         embed.setAuthor(msgg.username, msgg.avatarURL)
         embed.setColor("BLUE")
@@ -362,6 +360,21 @@ client.on('message', msg => {
     }
   }
 })
+// !pfp
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "!pfp") {
+      if (msg.mentions.array()[0]) {
+        embed = new Discord.RichEmbed();
+        embed.setAuthor(msg.mentions.array()[0].username, msg.mentions.array()[0].avatar)
+        embed.addField((msg.mentions.array()[0].username + "'s profile picture: '"), msg.member.permissions.toArray())
+        embed.setImage(msg.mentions.array()[0].avatarURL)
+        msg.channel.send(embed)
+      }
+    }
+  }
+});
 // !commands
 client.on('message', msg => {
   if (msg.content == '!commands') {
