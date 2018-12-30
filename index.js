@@ -34,6 +34,7 @@ io.action('FB test', (cb) => {
 });
 
 //Var defs
+const humanize = require('humanize-duration')
 const fs = require('fs');
 var cards = JSON.parse(fs.readFileSync("./cards.json"))
 const http = require('http');
@@ -208,6 +209,27 @@ client.on('message', msg => {
     }
   }
 })
+
+// !info
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!info") {
+      embed = new Discord.RichEmbed();
+      embed.setTitle("Information about " + msg.guild.name)
+      embed.addField("Created: ", msg.guild.createdAt)
+      embed.addField("Was made:" (humanize(msg.guild.createdTimestamp, {conjunction: " and ", largest: 3, round: true,}) + " ago."), true)
+      embed.addField("Owner:", msg.guild.owner.tag)
+      embed.addField("Region:", msg.guild.region, true)
+      embed.addField("Channels: ", msg.guild.channels.array().length)
+      embed.addField("Members:", msg.guild.members.array().length, true)
+      embed.setImage(msg.guild.iconURL)
+      embed.setFooter("Image of server's icon, " + msg.guild.iconURL)
+      embed.setColor("BLUE")
+      msg.channel.send(embed)
+    }
+  }
+});
+
 // !gamble
 client.on('message', msg => {
   if (isOk(msg)) {
