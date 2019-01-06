@@ -217,7 +217,7 @@ client.on('message', msg => {
       embed = new Discord.RichEmbed();
       embed.setTitle("Information about " + msg.guild.name)
       embed.addField("Created: ", msg.guild.createdAt)
-      embed.addField("Was made:" (humanize((Date.now() - msg.guild.createdTimestamp), {conjunction: " and ", largest: 3, round: true,}) + " ago."), true)
+      embed.addField("Was made:", (humanize((Date.now() - msg.guild.createdTimestamp), {conjunction: " and ", largest: 3, round: true,}) + " ago."), true)
       embed.addField("Owner:", msg.guild.owner.tag)
       embed.addField("Region:", msg.guild.region, true)
       embed.addField("Channels: ", msg.guild.channels.array().length)
