@@ -204,7 +204,7 @@ client.on('message', msg => {
       mess = msg.content.toLowerCase().split(" ")
       if (mess[0] == "!deyeet") {
         msg.delete()
-        msg.channel.bulkDelete(mess[1] + 1)
+        msg.channel.bulkDelete((mess[1] * 1) + 1)
       }
     }
   }
