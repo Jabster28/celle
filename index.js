@@ -218,7 +218,7 @@ client.on('message', msg => {
       embed.setTitle("Information about " + msg.guild.name)
       embed.addField("Created: ", msg.guild.createdAt)
       embed.addField("Was made:", (humanize((Date.now() - msg.guild.createdTimestamp), {conjunction: " and ", largest: 3, round: true,}) + " ago."), true)
-      embed.addField("Owner:", msg.guild.owner.tag)
+      embed.addField("Owner:", msg.guild.owner.user.tag)
       embed.addField("Region:", msg.guild.region, true)
       embed.addField("Channels: ", msg.guild.channels.array().length)
       embed.addField("Members:", msg.guild.members.array().length, true)
