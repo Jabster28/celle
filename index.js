@@ -611,7 +611,7 @@ client.on('message', msg => {
             embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
           }
         }
-      } else if (a[1] == "switch") {
+      } else if (a[1] == "switchfc") {
         nnid = a[2];
         (arrayObjectFind(msg.author.username, cards)).switchfc = nnid
         fs.writeFileSync("./cards.json", JSON.stringify(cards))
