@@ -555,7 +555,7 @@ client.on('message', msg => {
             "psn": 0,
             "insta": 0,
             "snap": 0,
-            "color": BLUE,
+            "color": "BLUE",
             "twitter": 0,
             "g+": 0
 
