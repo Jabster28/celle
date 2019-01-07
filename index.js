@@ -513,7 +513,10 @@ client.on('message', msg => {
     if (msg.content.toLowerCase() == "!testnotif") {
       embed = new Discord.RichEmbed();
       embed.addField("News!", "+ Updated `!card`, now you can change the color of it woth !card color (color)\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
-      embed.setAuthor(msg.author.username, msg.author.authorURL)
+      embed.addField("Known Errors:", "+ If you have never used `!card` before, you must say `!card` to initialise the card in the database.\n+ `!me` will generate lots of lines with permissions, depending on the server, so I suggest you do it in a spam or bot commands channel (or whatever applies to this server)")
+      embed.addField("Things I'm workin on:", "+ Splatoon map rotation stuff\n+ Finding and Fixing other bugs.")
+      embed.setAuthor("CELLE NEWS, LIVE!!!")
+      embed.addField("Also:", "Official website for Celle! https://celle.glitch.me")
       embed.setColor(toHex("salmon"))
       msg.channel.send(embed);
     }
@@ -920,6 +923,9 @@ io.action('alert', (cb) => {
         if (child.val().channelid) {
           embed = new Discord.RichEmbed();
           embed.addField("News!", "+ Updated `!card`, now you can change the color of it woth !card color (color)\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
+          embed.addField("Known Errors:", "+ If you have never used `!card` before, you must say `!card` to initialise the card in the database.\n+ `!me` will generate lots of lines with permissions, depending on the server, so I suggest you do it in a spam or bot commands channel (or whatever applies to this server)")
+          embed.addField("Things I'm workin on:", "+ Splatoon map rotation stuff\n+ Finding and Fixing other bugs.")
+          embed.addField("Also:", "Official website for Celle! https://celle.glitch.me")            embed.setAuthor("CELLE NEWS, LIVE!!!")
           embed.setAuthor(msg.author.username, msg.author.authorURL)
           embed.setColor(toHex("salmon"))
           findChannel(findGuild(child.val().serverid), child.val().channelid).send(embed)
