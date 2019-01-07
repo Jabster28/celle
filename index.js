@@ -3,7 +3,6 @@
 var Jimp = require('jimp');
 
 //PM2 stuffs
-
 require('dotenv').config();
 const io = require('@pm2/io')
 io.init({
@@ -34,6 +33,7 @@ io.action('FB test', (cb) => {
 });
 
 //Var defs
+const toHex = require("colornames")
 const humanize = require('humanize-duration')
 const fs = require('fs');
 var cards = JSON.parse(fs.readFileSync("./cards.json"))
@@ -217,7 +217,11 @@ client.on('message', msg => {
       embed = new Discord.RichEmbed();
       embed.setTitle("Information about " + msg.guild.name)
       embed.addField("Created: ", msg.guild.createdAt)
-      embed.addField("Was made:", (humanize((Date.now() - msg.guild.createdTimestamp), {conjunction: " and ", largest: 3, round: true,}) + " ago."), true)
+      embed.addField("Was made:", (humanize((Date.now() - msg.guild.createdTimestamp), {
+        conjunction: " and ",
+        largest: 3,
+        round: true,
+      }) + " ago."), true)
       embed.addField("Owner:", msg.guild.owner.user.tag)
       embed.addField("Region:", msg.guild.region, true)
       embed.addField("Channels: ", msg.guild.channels.array().length)
@@ -328,8 +332,6 @@ client.on('message', msg => {
         }
         console.log("ment")
         console.log(msg.mentions.users.array()[0])
-
-
         embed.setAuthor(msgg.username, msgg.avatarURL)
         embed.setColor("BLUE")
         embed.addField("Registered: ", msgg.createdAt)
@@ -529,6 +531,7 @@ client.on('message', msg => {
     if (a[0] == "!card") {
       if (!(a[1])) {
         embed = new Discord.RichEmbed();
+        embed.setColor(arrayObjectFind(msg.author.username, cards).color)
         if (arrayObjectFind(msg.author.username, cards)) {
           embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
           if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
@@ -569,6 +572,7 @@ client.on('message', msg => {
         (arrayObjectFind(msg.author.username, cards)).nnid = nnid
         fs.writeFileSync("./cards.json", JSON.stringify(cards))
         embed = new Discord.RichEmbed();
+        embed.setColor(arrayObjectFind(msg.author.username, cards).color)
         if (arrayObjectFind(msg.author.username, cards)) {
           embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
           if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
@@ -623,7 +627,16 @@ client.on('message', msg => {
           }
         }
       } else if ((a[1] == "colour") || (a[1] == "color")) {
-
+        nnid = a[2];
+        (arrayObjectFind(msg.author.username, cards)).color = toHex(nnid)
+        fs.writeFileSync("./cards.json", JSON.stringify(cards))
+        embed = new Discord.RichEmbed();
+        if (arrayObjectFind(msg.author.username, cards)) {
+          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
+          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
+            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
+          }
+        }
       }
     }
   }
