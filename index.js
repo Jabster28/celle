@@ -596,47 +596,18 @@ client.on('message', msg => {
         nnid = a[2];
         (arrayObjectFind(msg.author.username, cards)).xboxgt = nnid
         fs.writeFileSync("./cards.json", JSON.stringify(cards))
-        embed = new Discord.RichEmbed();
-        if (arrayObjectFind(msg.author.username, cards)) {
-          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
-          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
-            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
-          }
-        }
-
       } else if (a[1] == "psn") {
         nnid = a[2];
         (arrayObjectFind(msg.author.username, cards)).psn = nnid
         fs.writeFileSync("./cards.json", JSON.stringify(cards))
-        embed = new Discord.RichEmbed();
-        if (arrayObjectFind(msg.author.username, cards)) {
-          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
-          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
-            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
-          }
-        }
       } else if (a[1] == "switchfc") {
         nnid = a[2];
         (arrayObjectFind(msg.author.username, cards)).switchfc = nnid
         fs.writeFileSync("./cards.json", JSON.stringify(cards))
-        embed = new Discord.RichEmbed();
-        if (arrayObjectFind(msg.author.username, cards)) {
-          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
-          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
-            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
-          }
-        }
       } else if ((a[1] == "colour") || (a[1] == "color")) {
         nnid = a[2];
         (arrayObjectFind(msg.author.username, cards)).color = toHex(nnid)
         fs.writeFileSync("./cards.json", JSON.stringify(cards))
-        embed = new Discord.RichEmbed();
-        if (arrayObjectFind(msg.author.username, cards)) {
-          embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
-          if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
-            embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
-          }
-        }
       }
     }
   }
