@@ -523,6 +523,7 @@ client.on('message', msg => {
       embed.setColor("BLUE")
       embed.setTitle("Celle's Official Website")
       embed.setDescription("A website for simplifying installation of Celle")
+      embed.setThumbnail(client.user.avatarURL)
       embed.setURL("https://celle.glitch.me")
       msg.channel.send(embed)
     }
@@ -939,6 +940,7 @@ io.action('alert', (cb) => {
           embed.setColor("BLUE")
           embed.setTitle("Celle's Official Website")
           embed.setDescription("A website for simplifying installation of Celle")
+          embed.setThumbnail(client.user.avatarURL)
           embed.setURL("https://celle.glitch.me")
           findChannel(findGuild(child.val().serverid), child.val().channelid).send(embed)
         } else {
