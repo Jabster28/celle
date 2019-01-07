@@ -401,7 +401,7 @@ client.on('message', msg => {
 // !commands
 client.on('message', msg => {
   if (msg.content == '!commands') {
-    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]` ~~Delete~~ Deyeet the said amount of messages (not including that one) \n_**TIME TO DEDEDEYEET THAT MESSAGE**_")
+    msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]`_Mods Above_ ~~Delete~~ Deyeet the said amount of messages (not including that one) ")
   }
 })
 // !advert
@@ -507,6 +507,18 @@ client.on('message', msg => {
     }
   }
 })
+// !testnotif
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!testnotif") {
+      embed = new Discord.RichEmbed();
+      embed.addField("News!", "+ Updated `!card`, now you can change the color of it woth !card color (color)\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
+      embed.setAuthor(msg.author.username, msg.author.authorURL)
+      embed.setColor(toHex("salmon"))
+      msg.channel.send(embed);
+    }
+  }
+});
 // !tag
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -906,7 +918,11 @@ io.action('alert', (cb) => {
       console.log(child.val().serverid)
       if (child.val().serverid) {
         if (child.val().channelid) {
-          findChannel(findGuild(child.val().serverid), child.val().channelid).send("Two new commands (yaay)!\n`!card` will show you information like friend codes and such as you choose to display them. You can edit them by doinfg `!card [service] [name]`. For example, `!card nnid BobMaster200` would set your Nintendo Network id to BobMaster200.\nSaying `!notify` in a server where you have the permission to manage roles will subscribe that channel to notifications about Celle's updates (usually) every 2 weeks.\nAlso, bug fixes.")
+          embed = new Discord.RichEmbed();
+          embed.addField("News!", "+ Updated `!card`, now you can change the color of it woth !card color (color)\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
+          embed.setAuthor(msg.author.username, msg.author.authorURL)
+          embed.setColor(toHex("salmon"))
+          findChannel(findGuild(child.val().serverid), child.val().channelid).send(embed)
 
 
         } else {
