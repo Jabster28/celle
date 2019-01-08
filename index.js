@@ -553,8 +553,9 @@ client.on('message', msg => {
     if (a[0] == "!card") {
       if (!(a[1])) {
         embed = new Discord.RichEmbed();
-        embed.setColor(arrayObjectFind(msg.author.username, cards).color)
+        embed.setColor("BLUE")
         if (arrayObjectFind(msg.author.username, cards)) {
+          embed.setColor(arrayObjectFind(msg.author.username, cards).color)
           embed.addField("Name: ", (arrayObjectFind(msg.author.username, cards)).name)
           if (!((arrayObjectFind(msg.author.username, cards)).nnid == 0)) {
             embed.addField("Nintendo Network ID: ", (arrayObjectFind(msg.author.username, cards)).nnid)
