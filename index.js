@@ -199,7 +199,7 @@ client.on('message', msg => {
 // !deyeet
 client.on('message', msg => {
             if (isOk(msg)) {
-                if (isOk(msg) {
+                if (isOk(msg)) {
                         if ((msg.member.hasPermission("MANAGE_MESSAGES") || msg.author.id == 350930610719817728)) {
                             mess = msg.content.toLowerCase().split(" ")
                             if (mess[0] == "!deyeet") {
