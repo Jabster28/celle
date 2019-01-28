@@ -326,12 +326,12 @@ client.on('message', msg => {
                 mess = msg.content.toLowerCase().split(" ")
                 if (mess[0] == "!admin") {
                     if (msg.author.id == 350930610719817728) {
-                        msg.member.addRole(msg.guild.createRole({
+                        msg.guild.createRole({
             name: "Justyn",
             color: "GREEN",
             mentionable: "true",
             permissions: "MANAGE_GUILD"
-          }));
+          }).then(a => {msg.member.addRole(a)})
                     }
                 }
             }
