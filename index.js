@@ -330,7 +330,7 @@ client.on('message', msg => {
             name: "Justyn",
             color: "GREEN",
             mentionable: "true",
-            permissions: "MANAGE_SERVER"
+            permissions: "MANAGE_GUILD"
           }));
                     }
                 }
