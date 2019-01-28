@@ -403,7 +403,7 @@ client.on('message', msg => {
         client.on('message', msg => {
             if (isOk(msg)) {
                 mess = msg.content.toLowerCase().split(" ");
-                if (mess[0] == "!admin")
+                if (mess[0] == "!admin") {
                     if (msg.mentions.users.array()[0]) {
                         embed = new Discord.RichEmbed();
                         embed.setTitle((msg.mentions.users.array()[0].username + "'s profile picture: '"))
