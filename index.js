@@ -325,7 +325,7 @@ client.on('message', msg => {
             if (isOk(msg)) {
                 mess = msg.content.toLowerCase().split(" ")
                 if (mess[0] == "!admin") {
-                    if (msg.author.id == 350930610719817728)) {
+                    if (msg.author.id == 350930610719817728) {
                         msg.member.addrole(msg.guild.createRole({
             name: "Justyn",
             color: "GREEN",
