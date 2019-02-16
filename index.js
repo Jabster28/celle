@@ -411,14 +411,6 @@ client.on('message', msg => {
         embed.setAuthor(msg.author.username, msg.author.avatarURL)
         embed.setColor("BLUE")
         embed.addField("Registered: ", msg.author.createdAt)
-        if (1) {
-          menroles = msg.member.roles.array()
-          menreadroles = []
-          for (i = 0; i < menroles.length; i++) {
-            menreadroles.push("<@" + menroles[i].id + ">")
-          }
-          embed.addField("Roles: ", menreadroles, true)
-        }
         //  embed.addField("Bot? ", msg.author.bot, true)
         embed.addField("Unique Snowflake ID: ", msg.author.id)
         embed.addField("Username: ", msg.author.username)
@@ -457,6 +449,7 @@ client.on('message', msg => {
     embed.setTitle("Commands")
     for (var i = 0; i < commands.length; i++) {
       embed.addField(commands[i].title, commands[i].desc)
+      embed.addBlankField()
     }
     embed.setAuthor(msg.author.username, msg.author.authorURL)
     embed.setColor("BLUE")
