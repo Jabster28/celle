@@ -534,7 +534,7 @@ client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "!purge") {
-      if (mess[1]) {
+      if (msg.mentions.channels.array[0]) {
         msg.mentions.channels.array[0].bulkDelete(99).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", mess.mentions.channels.array[0].name)
