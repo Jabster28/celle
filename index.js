@@ -529,6 +529,19 @@ client.on('message', msg => {
     msg.channel.send(embed)
   }
 })
+// !purge
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "!purge") {
+      if (mess[1]) {
+        mess.mentions.channels.array[0].bulkDelete(199)
+      } else {
+        message.channel.bulkDelete(199)
+      }
+    }
+  }
+});
 // !advert
 client.on('message', msg => {
   if (isOk(msg)) {
