@@ -92,6 +92,7 @@ io.action('FB test', (cb) => {
 });
 
 //Var defs
+const weather = require("weather-js")
 const toHex = require("colornames")
 const humanize = require('humanize-duration')
 const fs = require('fs');
@@ -244,6 +245,7 @@ client.on('message', msg => {
     }
   }
 })
+
 // !maketokenaccount
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -260,6 +262,42 @@ client.on('message', msg => {
     }
   }
 })
+// !roll
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "!roll") {
+      if (mess[1]) {
+        embed = new Discord.RichEmbed();
+        embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
+        embed.setColor("BLUE")
+        embed.setTitle(generateRandomNumber(mess[1]) + "!");
+        embed.setFooter(mess[1] + "-sided dice rolled.")
+        msg.channel.send(embed)
+      } else {
+        embed = new Discord.RichEmbed();
+        embed.setAuthor("Is rolling a Dice...", msg.author.avatarURL)
+        embed.setColor("BLUE")
+        embed.setTitle(generateRandomNumber(6) + "!");
+        embed.setFooter("6-sided dice rolled.")
+        msg.channel.send(embed)
+      }
+    }
+  }
+});
+
+// !ping
+client.on('message', msg => {
+  if (isOk(msg)) {
+    if (msg.content.toLowerCase() == "!ping") {
+      embed = new Discord.RichEmbed();
+      embed.setTitle("🏓 Pong!")
+      embed.addField("Took:", (client.ping + " milliseconds."))
+      embed.setColor("BLUE")
+      msg.channel.send(embed)
+    }
+  }
+});
 // !deyeet
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -302,7 +340,32 @@ client.on('message', msg => {
     }
   }
 });
-
+// !mod
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "!mod") {
+      if (hasModPerms(msg)) {
+        for (var i = 0; i < msg.guild.roles.array().length; i++) {
+          msg.guild.roles.array()[i] = role
+          if (role.name.toLowerCase() == "mod" || role.name.toLowerCase() == "mods" || role.name.toLowerCase() == "moderator" || role.name.toLowerCase() == "moderators") {
+            mod = role
+          }
+        }
+        if (typeof mod) {
+          msg.member.addRole(mod)
+        } else {
+          msg.mentions.users.array()[0].addRole(msg.guild.createRole({
+            name: "Mod",
+            color: "GREEN",
+            mentionable: "true",
+            permissions: "MANAGE_CHANNELS"
+          }));
+        }
+      }
+    }
+  }
+});
 // !gamble
 client.on('message', msg => {
   if (isOk(msg)) {
@@ -577,6 +640,30 @@ client.on('message', msg => {
     }
   }
 })
+// !weather
+client.on('message', msg => {
+  if (isOk(msg)) {
+    mess = msg.content.toLowerCase().split(" ");
+    if (mess[0] == "!weather") {
+      mess.shift()
+      weather.find({
+        search: mess.join(" "),
+        degreeType: 'C'
+      }, async function(err, result) {
+        if (err) console.log(err);
+        embed = new Discord.RichEmbed();
+        embed.setTitle("Weather for " + mess)
+        result = JSON.stringify(result, null, 2)
+        stuff.misc.push(result);
+        embed.addField("Current Temperature: ", result[0].current.temperature)
+        embed.setAuthor(msg.author.username, msg.author.authorURL)
+        embed.setColor("BLUE")
+        msg.channel.send(embed)
+        fs.writeFileSync("./stuff.json", JSON.stringify(stuff))
+      });
+    }
+  }
+});
 // !testnotif
 client.on('message', msg => {
   if (isOk(msg)) {
