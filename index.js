@@ -116,10 +116,10 @@ const keep_alive = require('./keep_alive.js')
 
 // Function defs
 
-function bulkkDelete(channel) {
+function bulkkDelete(textchannel) {
   x = 0
-  for (var i = 0; i < channel.fetchMessages().array().length; i++) {
-    channel.fetchMessages().array()[i].delete()
+  for (var i = 0; i < textchannel.fetchMessages().array().length; i++) {
+    textchannel.fetchMessages().array()[i].delete()
     x++
   }
   return {size: x}
