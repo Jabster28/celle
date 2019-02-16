@@ -457,8 +457,8 @@ client.on('message', msg => {
   if (isOk(msg)) {
     mess = msg.content.toLowerCase().split(" ")
     if (mess[0] == "!me") {
-      if (msg.mentions.users.array()[0]) {
-        msgg = msg.mentions.users.array()[0]
+      if (msg.mentions.members.array()[0]) {
+        msgg = msg.mentions.members.array()[0]
         if (msg.mentions.users.array()[0].bot != true) {
           msgg = msg.mentions.users.array()[0]
         }
@@ -467,14 +467,6 @@ client.on('message', msg => {
         embed.setAuthor(msgg.username, msgg.avatarURL)
         embed.setColor("BLUE")
         embed.addField("Registered: ", msgg.createdAt)
-        if (msg.mentions.members.array()[0]) {
-          menroles = msg.mentions.members.array()[0].roles.array()
-          menreadroles = []
-          for (i = 0; i < menroles.length; i++) {
-            menreadroles.push("<@" + menroles[i].id + ">")
-          }
-          embed.addField("Roles: ", menreadroles, true)
-        }
         //  embed.addField("Bot? ", msg.author.bot, true)
         embed.addField("Unique Snowflake ID: ", msgg.id)
         embed.addField("Username: ", msgg.username)
