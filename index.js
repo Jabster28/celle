@@ -466,16 +466,16 @@ client.on('message', msg => {
         console.log(msg.mentions.users.array()[0])
         embed.setAuthor(msgg.username, msgg.avatarURL)
         embed.setColor("BLUE")
-        embed.addField("Registered: ", msgg.createdAt)
+        embed.addField("Registered: ", msgg.createdAt, true)
         //  embed.addField("Bot? ", msg.author.bot, true)
         embed.addField("Unique Snowflake ID: ", msgg.id)
-        embed.addField("Username: ", msgg.username)
+        embed.addField("Username: ", msgg.username, true)
         embed.addField("Friend tag: ", msgg.tag)
         if (msgg.presence.game) {
           embed.addField("Current Application or Game: ", msgg.presence.game.toString())
         }
         embed.addField("User Presence? ", msgg.presence.status.toUpperCase())
-        embed.addField("Avatar: ", msgg.username)
+        embed.addField("Avatar: ", msgg.username, true)
         embed.setImage(msgg.avatarURL)
         msg.channel.send(embed)
       } else {
