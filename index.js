@@ -543,7 +543,6 @@ client.on('message', msg => {
           embed.setColor("BLUE")
           msg.channel.send(embed).then(m => m.delete(3000))
         })
-      }
     } else {
       msg.channel.bulkDelete(99).then(messages => {
         embed = new Discord.RichEmbed();
