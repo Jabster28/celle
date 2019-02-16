@@ -535,7 +535,7 @@ client.on('message', msg => {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "!purge") {
       if (msg.mentions.channels.array[0]) {
-        msg.mentions.channels.array[0].fetchMessages().then(ms => bulkDelete(ms.size).then(messages => {
+        msg.mentions.channels.array[0].fetchMessages().then(ms => msg.mentions.channels.array[0].bulkDelete(ms.size).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", mess.mentions.channels.array[0].name)
           embed.addField("Messages Deleted:", messages.size)
@@ -544,7 +544,7 @@ client.on('message', msg => {
           msg.channel.send(embed).then(m => m.delete(3000))
         }))
       } else {
-        msg.channel.fetchMessages().then(ms => bulkDelete(ms.size).then(messages => {
+        msg.channel.fetchMessages().then(ms => msg.channel.bulkDelete(ms.size).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", msg.channel)
           embed.addField("Messages Deleted:", messages.size)
