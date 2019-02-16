@@ -535,23 +535,23 @@ client.on('message', msg => {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "!purge") {
       if (msg.mentions.channels.array[0]) {
-        msg.mentions.channels.array[0].bulkDelete(msg.mentions.channels.array[0].fetchMessages.array().length).then(messages => {
+        msg.mentions.channels.array[0].fetchMessages().then(ms => bulkDelete(ms.size).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", mess.mentions.channels.array[0].name)
           embed.addField("Messages Deleted:", messages.size)
           embed.setAuthor(msg.author.username, msg.author.authorURL)
           embed.setColor("BLUE")
           msg.channel.send(embed).then(m => m.delete(3000))
-        })
+        }))
       } else {
-        msg.channel.bulkDelete(msg.channel.fetchMessages.array().length).then(messages => {
+        msg.channel.fetchMessages().then(ms => bulkDelete(ms.size).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", msg.channel)
           embed.addField("Messages Deleted:", messages.size)
           embed.setAuthor(msg.author.username, msg.author.authorURL)
           embed.setColor("BLUE")
           msg.channel.send(embed).then(m => m.delete(3000))
-        })
+        }))
       }
     }
   }
