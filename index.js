@@ -12,6 +12,24 @@ io.init({
     }
   }
 })
+
+function sendNotif(channel) {
+  embed = new Discord.RichEmbed();
+  embed.addField("News!", "+ Updated `!card`, now you can change the color of it with `!card color (color)`\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
+  embed.addField("Known Errors:", "+ If you have never used `!card` before, you must say `!card` to initialise the card in the database.")
+  embed.addField("Things I'm workin on:", "+ Finding and Fixing other bugs.")
+  embed.addField("Also:", "Official website for Celle!")
+  embed.setAuthor("CELLE NEWS, LIVE!!!")
+  embed.setColor(toHex("salmon"))
+  embedd = new Discord.RichEmbed();
+  embedd.setColor("BLUE")
+  embedd.setTitle("Celle's Official Website")
+  embedd.setDescription("A website for simplifying installation of Celle")
+  embedd.setThumbnail(client.user.avatarURL)
+  embedd.setURL("https://celle.glitch.me")
+  channel.send(embed)
+  channel.send(embedd)
+}
 const commands = [{
     "title": "!me [user]",
     "desc": "Gets some information about a user or a bot on the server and sends it to the channel."
@@ -563,21 +581,7 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (isOk(msg)) {
     if (msg.content.toLowerCase() == "!testnotif") {
-      embed = new Discord.RichEmbed();
-      embed.addField("News!", "+ Updated `!card`, now you can change the color of it with `!card color (color)`\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
-      embed.addField("Known Errors:", "+ If you have never used `!card` before, you must say `!card` to initialise the card in the database.\n+ `!me` will generate lots of lines with permissions, depending on the server, so I suggest you do it in a spam or bot commands channel (or whatever applies to this server)")
-      embed.addField("Things I'm workin on:", "+ Splatoon map rotation stuff\n+ Finding and Fixing other bugs.")
-      embed.addField("Also:", "Official website for Celle!")
-      embed.setAuthor("CELLE NEWS, LIVE!!!")
-      embed.setColor(toHex("salmon"))
-      msg.channel.send(embed)
-      embed = new Discord.RichEmbed();
-      embed.setColor("BLUE")
-      embed.setTitle("Celle's Official Website")
-      embed.setDescription("A website for simplifying installation of Celle")
-      embed.setThumbnail(client.user.avatarURL)
-      embed.setURL("https://celle.glitch.me")
-      msg.channel.send(embed)
+      sendNotif(msg.channel)
     }
   }
 });
@@ -981,21 +985,7 @@ io.action('alert', (cb) => {
       console.log(child.val().serverid)
       if (child.val().serverid) {
         if (child.val().channelid) {
-          embed = new Discord.RichEmbed();
-          embed.addField("News!", "+ Updated `!card`, now you can change the color of it with `!card color (color)`\n+ I'm using `yarn` instead of NPM now, meaning less delay time for commands!\n+ New command `!info` sends some nice information about the server, like channels, members and the server icon.\n+ `!yds`, `!hmm` and `!crl` will post their appropriate memes in an embedded message.")
-          embed.addField("Known Errors:", "+ If you have never used `!card` before, you must say `!card` to initialise the card in the database.\n+ `!me` will generate lots of lines with permissions, depending on the server, so I suggest you do it in a spam or bot commands channel (or whatever applies to this server)")
-          embed.addField("Things I'm workin on:", "+ Splatoon map rotation stuff\n+ Finding and Fixing other bugs.")
-          embed.addField("Also:", "Official website for Celle!")
-          embed.setAuthor("CELLE NEWS, LIVE!!!")
-          embed.setColor(toHex("salmon"))
-          findChannel(findGuild(child.val().serverid), child.val().channelid).send(embed)
-          embed = new Discord.RichEmbed();
-          embed.setColor("BLUE")
-          embed.setTitle("Celle's Official Website")
-          embed.setDescription("A website for simplifying installation of Celle")
-          embed.setThumbnail(client.user.avatarURL)
-          embed.setURL("https://celle.glitch.me")
-          findChannel(findGuild(child.val().serverid), child.val().channelid).send(embed)
+          sendNotif(indChannel(findGuild(child.val().serverid), child.val().channelid))
         } else {
           cb("ERROR, CHECK ISSUES LOG");
           io.notify('aonc not defined');
