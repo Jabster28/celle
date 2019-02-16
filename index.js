@@ -545,9 +545,9 @@ client.on('message', msg => {
         })
       }
     } else {
-      message.channel.bulkDelete(199).then(messages => {
+      msg.channel.bulkDelete(199).then(messages => {
         embed = new Discord.RichEmbed();
-        embed.addField("Channel Purged:", message.channel)
+        embed.addField("Channel Purged:", msg.channel)
         embed.addField("Messages Deleted:", messages.size)
         embed.setAuthor(msg.author.username, msg.author.authorURL)
         embed.setColor("BLUE")
