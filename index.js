@@ -542,20 +542,20 @@ client.on('message', msg => {
           embed.setAuthor(msg.author.username, msg.author.authorURL)
           embed.setColor("BLUE")
           msg.channel.send(embed).then(m => m.delete(3000))
-        }
-      } else {
-        message.channel.bulkDelete(199).then(messages => {
-          embed = new Discord.RichEmbed();
-          embed.addField("Channel Purged:", message.channel)
-          embed.addField("Messages Deleted:", messages.size)
-          embed.setAuthor(msg.author.username, msg.author.authorURL)
-          embed.setColor("BLUE")
-          msg.channel.send(embed).then(m => m.delete(3000))
-        }
+        })
       }
+    } else {
+      message.channel.bulkDelete(199).then(messages => {
+        embed = new Discord.RichEmbed();
+        embed.addField("Channel Purged:", message.channel)
+        embed.addField("Messages Deleted:", messages.size)
+        embed.setAuthor(msg.author.username, msg.author.authorURL)
+        embed.setColor("BLUE")
+        msg.channel.send(embed).then(m => m.delete(3000))
+      })
     }
   }
-});
+})
 // !advert
 client.on('message', msg => {
   if (isOk(msg)) {
