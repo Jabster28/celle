@@ -543,15 +543,16 @@ client.on('message', msg => {
           embed.setColor("BLUE")
           msg.channel.send(embed).then(m => m.delete(3000))
         })
-    } else {
-      msg.channel.bulkDelete(99).then(messages => {
-        embed = new Discord.RichEmbed();
-        embed.addField("Channel Purged:", msg.channel)
-        embed.addField("Messages Deleted:", messages.size)
-        embed.setAuthor(msg.author.username, msg.author.authorURL)
-        embed.setColor("BLUE")
-        msg.channel.send(embed).then(m => m.delete(3000))
-      })
+      } else {
+        msg.channel.bulkDelete(99).then(messages => {
+          embed = new Discord.RichEmbed();
+          embed.addField("Channel Purged:", msg.channel)
+          embed.addField("Messages Deleted:", messages.size)
+          embed.setAuthor(msg.author.username, msg.author.authorURL)
+          embed.setColor("BLUE")
+          msg.channel.send(embed).then(m => m.delete(3000))
+        })
+      }
     }
   }
 })
