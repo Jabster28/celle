@@ -116,6 +116,14 @@ const keep_alive = require('./keep_alive.js')
 
 // Function defs
 
+function bulkkDelete(channel) {
+  x = 0
+  for (var i = 0; i < channel.fetchMessages().array().length; i++) {
+    channel.fetchMessages().array()[i].delete()
+    x++
+  }
+  return {size: x}
+}
 function generateRandomNumber(max) {
   return Math.floor(Math.random() * max) + 1;
 }
@@ -535,7 +543,7 @@ client.on('message', msg => {
     mess = msg.content.toLowerCase().split(" ");
     if (mess[0] == "!purge") {
       if (msg.mentions.channels.array[0]) {
-        msg.mentions.channels.array[0].fetchMessages().then(ms => msg.mentions.channels.array[0].bulkDelete(ms.size).then(messages => {
+        msg.mentions.channels.array[0].fetchMessages().then(ms => bulkkDelete(msg.mentions.channels.array[0]).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", mess.mentions.channels.array[0].name)
           embed.addField("Messages Deleted:", messages.size)
@@ -544,7 +552,7 @@ client.on('message', msg => {
           msg.channel.send(embed).then(m => m.delete(3000))
         }))
       } else {
-        msg.channel.fetchMessages().then(ms => msg.channel.bulkDelete(ms.size).then(messages => {
+        msg.channel.fetchMessages().then(ms => bulkkDelete(msg.channel).then(messages => {
           embed = new Discord.RichEmbed();
           embed.addField("Channel Purged:", msg.channel)
           embed.addField("Messages Deleted:", messages.size)
