@@ -407,7 +407,7 @@ client.on('message', msg => {
         msg.channel.send(embed)
       } else {
         embed = new Discord.RichEmbed();
-        embed.addField("Roles: ", msg.member.roles.toArray())
+        embed.addField("Roles: ", msg.member.roles.array())
         embed.setAuthor(msg.author.username, msg.author.avatarURL)
         embed.setColor("BLUE")
         embed.addField("Registered: ", msg.author.createdAt)
