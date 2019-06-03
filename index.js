@@ -213,6 +213,51 @@ function findGuild(id) {
     }
   }
 }
+
+function generateRandomNumber(max) {
+  return Math.floor(Math.random() * max) + 1;
+}
+
+function findChannel(guld, channelid) {
+  for (var i = 0; i < guld.channels.array().length; i++) {
+    chanelll = guld.channels.array()[i]
+    if (chanelll.id == channelid) {
+      return chanelll
+    }
+  }
+}
+
+function roleFind(array, roleid) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].id == roleid) {
+      return array[i]
+    }
+  }
+}
+
+function findGuild(id) {
+  for (var i = 0; i < client.guilds.array().length; i++) {
+    if (client.guilds.array()[i].id == id) {
+      return client.guilds.array()[i]
+    }
+  }
+}
+
+function hasModPerms(mess) {
+  if (mess.member.hasPermission("KICK_MEMBERS") || mess.author.id == 350930610719817728) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function arrayObjFindByName(array, name) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].name == name) {
+      return array[i]
+    }
+  }
+}
 // Actual stuffs
 
 client.on('ready', () => {
